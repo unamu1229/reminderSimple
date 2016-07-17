@@ -15,6 +15,7 @@
 		F21E4F541D3B877F00179FEE /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F21E4F521D3B877F00179FEE /* LaunchScreen.storyboard */; };
 		F21E4F5F1D3B878000179FEE /* reminderSimpleTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F21E4F5E1D3B878000179FEE /* reminderSimpleTests.swift */; };
 		F21E4F6A1D3B878000179FEE /* reminderSimpleUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F21E4F691D3B878000179FEE /* reminderSimpleUITests.swift */; };
+		F21E4F781D3B90E300179FEE /* TableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F21E4F771D3B90E200179FEE /* TableViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -49,6 +50,7 @@
 		F21E4F651D3B878000179FEE /* reminderSimpleUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = reminderSimpleUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		F21E4F691D3B878000179FEE /* reminderSimpleUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = reminderSimpleUITests.swift; sourceTree = "<group>"; };
 		F21E4F6B1D3B878000179FEE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		F21E4F771D3B90E200179FEE /* TableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TableViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -102,6 +104,7 @@
 				F21E4F461D3B877F00179FEE /* AppDelegate.swift */,
 				F21E4F481D3B877F00179FEE /* ViewController.swift */,
 				F21E4F4A1D3B877F00179FEE /* Main.storyboard */,
+				F21E4F771D3B90E200179FEE /* TableViewController.swift */,
 				F21E4F501D3B877F00179FEE /* Assets.xcassets */,
 				F21E4F521D3B877F00179FEE /* LaunchScreen.storyboard */,
 				F21E4F551D3B877F00179FEE /* Info.plist */,
@@ -262,6 +265,7 @@
 				F21E4F4F1D3B877F00179FEE /* reminderSimple.xcdatamodeld in Sources */,
 				F21E4F491D3B877F00179FEE /* ViewController.swift in Sources */,
 				F21E4F471D3B877F00179FEE /* AppDelegate.swift in Sources */,
+				F21E4F781D3B90E300179FEE /* TableViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
