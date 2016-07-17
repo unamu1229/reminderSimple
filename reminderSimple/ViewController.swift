@@ -18,6 +18,7 @@ class ViewController: UIViewController {
     @IBOutlet weak var inputForm: UITextField!
     
     @IBAction func datePicker(sender: UIDatePicker) {
+        didChangeDate(sender)
     }
     
     @IBAction func registar(sender: AnyObject) {
@@ -31,6 +32,8 @@ class ViewController: UIViewController {
         
         //ユーザーにカレンダーの使用許可を求める
         allowAuthorization()
+        
+        NSTimer.scheduledTimerWithTimeInterval(60, target: self, selector: #selector(ViewController.updateAlert), userInfo: nil, repeats: true)
 
     }
 
@@ -39,6 +42,61 @@ class ViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
+    /*
+     DatePickerの値が変わった時に呼び出されるメソッド.
+     */
+    func didChangeDate(sender: UIDatePicker) {
+        let myDateFormatter = NSDateFormatter()
+        myDateFormatter.timeStyle = .ShortStyle
+        myDateFormatter.dateStyle = .ShortStyle
+        let mySelectDateString = myDateFormatter.stringFromDate(sender.date)
+        let mySelectDate = myDateFormatter.dateFromString(mySelectDateString)!
+        
+        myDate = NSDate(timeInterval: 0, sinceDate: mySelectDate)
+    }
+    
+    func updateAlert()
+    {
+        
+        // リマインダーを取得する
+        myEventStore.requestAccessToEntityType(EKEntityType.Reminder){
+            (granted: Bool, error: NSError?) -> Void in
+            
+            if granted{
+                // 2
+                let predicate = self.myEventStore.predicateForRemindersInCalendars(nil)
+                self.myEventStore.fetchRemindersMatchingPredicate(predicate, completion: { (reminders: [EKReminder]?) -> Void in
+                    
+                    let dateFormatter = NSDateFormatter()
+                    dateFormatter.dateFormat = "yyyy年MM月dd日HH時mm分"
+                    let now = NSDate()
+                    for i in reminders! {
+                        if let dueDate = i.dueDateComponents?.date{
+                            let reminderFormatDate = dateFormatter.stringFromDate(dueDate)
+                            let nowFormatDate = dateFormatter.stringFromDate(now)
+                            print(nowFormatDate)
+                            print(reminderFormatDate)
+                            if reminderFormatDate == nowFormatDate {
+                                // メインスレッド 画面制御. 非同期.
+                                dispatch_async(dispatch_get_main_queue(), { () -> Void in
+                                  self.alert(i.title)
+                                })
+                            }
+                        }
+                    }
+                })
+            }else{
+                print("The app is not permitted to access reminders, make sure to grant permission in the settings and try again")
+            }
+        }
+    }
+    
+    func alert(title:String){
+        let myAlert = UIAlertController(title: title, message: "やりなさい", preferredStyle: .Alert)
+        let myAction = UIAlertAction(title:"やります", style:  .Default, handler: nil)
+        myAlert.addAction(myAction)
+        presentViewController(myAlert, animated: true, completion: nil)
+    }
     
     func getAuthorization_status() -> Bool {
         
