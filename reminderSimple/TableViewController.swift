@@ -129,5 +129,18 @@ class TableViewController: UITableViewController {
         }
         return cell
     }
+    
+    //テーブルのセルをスワイプして削除する
+    override func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
+        
+        let reminder: EKReminder = reminders[indexPath.row]
+        do{
+            try eventStore.removeReminder(reminder, commit: true)
+            self.reminders.removeAtIndex(indexPath.row)
+            tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: UITableViewRowAnimation.Fade)
+        }catch{
+            print("An error occurred while removing the reminder from the Calendar database: \(error)")
+        }
+    }
 
 }

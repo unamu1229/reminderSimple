@@ -13,9 +13,22 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <navigationBar key="tableHeaderView" contentMode="scaleToFill" id="Dru-LZ-N9G">
+                            <rect key="frame" x="0.0" y="0.0" width="600" height="44"/>
+                            <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                            <items>
+                                <navigationItem title="タスク一覧" id="YBy-2d-vs6">
+                                    <barButtonItem key="leftBarButtonItem" title="戻る" id="S55-gc-Pf3">
+                                        <connections>
+                                            <segue destination="BYZ-38-t0r" kind="show" id="yaZ-yr-gVz"/>
+                                        </connections>
+                                    </barButtonItem>
+                                </navigationItem>
+                            </items>
+                        </navigationBar>
                         <prototypes>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="reminderCell" textLabel="i9G-KD-vHs" detailTextLabel="cBI-Lx-zBe" style="IBUITableViewCellStyleValue1" id="UaH-OV-TEF">
-                                <rect key="frame" x="0.0" y="28" width="600" height="44"/>
+                                <rect key="frame" x="0.0" y="72" width="600" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="UaH-OV-TEF" id="2Zp-O8-FLH">
                                     <rect key="frame" x="0.0" y="0.0" width="600" height="43"/>
