@@ -77,12 +77,18 @@
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yGI-5p-a4n">
                                 <rect key="frame" x="240" y="249" width="120" height="30"/>
                                 <state key="normal" title="タスクを登録する"/>
+                                <connections>
+                                    <action selector="registar:" destination="BYZ-38-t0r" eventType="touchUpInside" id="R4T-lD-MWV"/>
+                                </connections>
                             </button>
                             <datePicker contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="dateAndTime" minuteInterval="1" translatesAutoresizingMaskIntoConstraints="NO" id="DgO-E2-1lR">
                                 <rect key="frame" x="0.0" y="353" width="600" height="216"/>
                                 <date key="date" timeIntervalSinceReferenceDate="490441819.76633799">
                                     <!--2016-07-17 09:50:19 +0000-->
                                 </date>
+                                <connections>
+                                    <action selector="datePicker:" destination="BYZ-38-t0r" eventType="valueChanged" id="y8i-Q4-Evd"/>
+                                </connections>
                             </datePicker>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
@@ -98,6 +104,9 @@
                             <constraint firstAttribute="trailing" secondItem="DgO-E2-1lR" secondAttribute="trailing" id="njz-9q-Vt0"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="inputForm" destination="Sxb-O5-KuW" id="8Dh-H5-JBn"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
