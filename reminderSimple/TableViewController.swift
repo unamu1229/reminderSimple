@@ -7,17 +7,40 @@
 //
 
 import UIKit
+import EventKit
 
 class TableViewController: UITableViewController {
+    
+    var eventStore: EKEventStore! = EKEventStore()
+    var reminders: [EKReminder]! = [EKReminder]()
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        self.tableView.dataSource = self
+        self.tableView.delegate = self
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
 
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
         // self.navigationItem.rightBarButtonItem = self.editButtonItem()
+    }
+    
+    override func viewWillAppear(animated: Bool) {
+        eventStore.requestAccessToEntityType(EKEntityType.Reminder) { (granted: Bool, error: NSError?) -> Void in
+            
+            if granted{
+                let predicate = self.eventStore.predicateForRemindersInCalendars(nil)
+                self.eventStore.fetchRemindersMatchingPredicate(predicate, completion: { (reminders: [EKReminder]?) -> Void in
+                    
+                    self.reminders = reminders
+                    dispatch_async(dispatch_get_main_queue()) {
+                        self.tableView.reloadData()
+                    }
+                })
+            }else{
+                print("The app is not permitted to access reminders, make sure to grant permission in the settings and try again")
+            }
+        }
     }
 
     override func didReceiveMemoryWarning() {
@@ -29,12 +52,12 @@ class TableViewController: UITableViewController {
 
     override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         // #warning Incomplete implementation, return the number of sections
-        return 0
+        return 1
     }
 
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-        return 0
+          return reminders.count
     }
 
     /*
@@ -91,5 +114,20 @@ class TableViewController: UITableViewController {
         // Pass the selected object to the new view controller.
     }
     */
+    
+    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+        
+        let cell:UITableViewCell! = tableView.dequeueReusableCellWithIdentifier("reminderCell")
+        let reminder:EKReminder! = self.reminders![indexPath.row]
+        cell.textLabel?.text = reminder.title
+        let formatter:NSDateFormatter = NSDateFormatter()
+        formatter.dateFormat = "yyyy-MM-dd"
+        if let dueDate = reminder.dueDateComponents?.date{
+            cell.detailTextLabel?.text = formatter.stringFromDate(dueDate)
+        }else{
+            cell.detailTextLabel?.text = "N/A"
+        }
+        return cell
+    }
 
 }
