@@ -13,6 +13,7 @@ import CoreData
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
+    var myNavigationController: UINavigationController!
     
     func dateComponentFromNSDate(date: NSDate)-> NSDateComponents{
         
@@ -23,6 +24,20 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         // Override point for customization after application launch.
+        
+        //初期画面とタスク一覧画面にナビゲーションエリアを表示し、タスク一覧画面ではBackボタンを表示する
+        let storyboard: UIStoryboard = UIStoryboard(name: "Main", bundle: NSBundle.mainBundle())
+        let viewController: UIViewController = (storyboard.instantiateInitialViewController() as UIViewController?)!
+        self.window = UIWindow(frame: UIScreen.mainScreen().bounds)
+        self.myNavigationController = UINavigationController(rootViewController: viewController)
+        self.window?.rootViewController = myNavigationController
+        self.window?.makeKeyAndVisible()
+        
+        //プッシュ通知の設定の許可を求める
+        application.registerUserNotificationSettings(
+            UIUserNotificationSettings(forTypes: [.Sound, .Badge, .Alert], categories: nil)
+        )
+        
         return true
     }
 
