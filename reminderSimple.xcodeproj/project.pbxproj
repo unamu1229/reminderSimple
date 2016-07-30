@@ -490,6 +490,7 @@
 				F21E4F701D3B878000179FEE /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		F21E4F711D3B878000179FEE /* Build configuration list for PBXNativeTarget "reminderSimpleTests" */ = {
 			isa = XCConfigurationList;
@@ -498,6 +499,7 @@
 				F21E4F731D3B878000179FEE /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		F21E4F741D3B878000179FEE /* Build configuration list for PBXNativeTarget "reminderSimpleUITests" */ = {
 			isa = XCConfigurationList;
@@ -506,6 +508,7 @@
 				F21E4F761D3B878000179FEE /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 

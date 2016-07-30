@@ -23,9 +23,11 @@ class TableViewController: UITableViewController {
 
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
         // self.navigationItem.rightBarButtonItem = self.editButtonItem()
+    
     }
     
     override func viewWillAppear(animated: Bool) {
+        
         eventStore.requestAccessToEntityType(EKEntityType.Reminder) { (granted: Bool, error: NSError?) -> Void in
             
             if granted{
@@ -41,6 +43,7 @@ class TableViewController: UITableViewController {
                 print("The app is not permitted to access reminders, make sure to grant permission in the settings and try again")
             }
         }
+        
     }
 
     override func didReceiveMemoryWarning() {

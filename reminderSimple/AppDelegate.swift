@@ -8,12 +8,14 @@
 
 import UIKit
 import CoreData
+import EventKit
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
     var myNavigationController: UINavigationController!
+   // let myReminder = ReminderController()
     
     func dateComponentFromNSDate(date: NSDate)-> NSDateComponents{
         
@@ -49,8 +51,54 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func applicationDidEnterBackground(application: UIApplication) {
         // Use this method to release shared resources, save user data, invalidate timers, and store enough application state information to restore your application to its current state in case it is terminated later.
         // If your application supports background execution, this method is called instead of applicationWillTerminate: when the user quits.
-    }
 
+        var myEventStore: EKEventStore! = EKEventStore()
+        // リマインダーを取得する
+        myEventStore.requestAccessToEntityType(EKEntityType.Reminder){
+            (granted: Bool, error: NSError?) -> Void in
+            
+            if granted{
+                // 2
+                let predicate = myEventStore.predicateForRemindersInCalendars(nil)
+                myEventStore.fetchRemindersMatchingPredicate(predicate, completion: { (reminders: [EKReminder]?) -> Void in
+                    
+                    var arrNotification:[UILocalNotification] = []
+                    var badgeCount = 0
+                    let dateFormatter = NSDateFormatter()
+                    dateFormatter.dateFormat = "yyyy年MM月dd日HH時mm分"
+                    let now = NSDate()
+                    for i in reminders! {
+                        if let dueDate = i.dueDateComponents?.date{
+                            let reminderFormatDate = dateFormatter.stringFromDate(dueDate)
+                            let nowFormatDate = dateFormatter.stringFromDate(now)
+                            if let dueDate = i.dueDateComponents?.date{
+                                let notification = UILocalNotification()
+                                let dateFormatter = NSDateFormatter()
+                                dateFormatter.locale = NSLocale(localeIdentifier: "ja_JP")
+                                dateFormatter.dateFormat = "yyyy年MM月dd日HH時mm分ss秒"
+                                notification.alertBody = i.title
+                                notification.fireDate = i.dueDateComponents?.date
+                                notification.soundName = UILocalNotificationDefaultSoundName
+                                
+                                let now = NSDate()
+                                
+                                if dueDate.compare(now) == NSComparisonResult.OrderedAscending{
+                                    badgeCount += 1
+                                }
+                            }
+                        }
+                    }
+                    //バッチの数字を設定する
+                    application.applicationIconBadgeNumber = badgeCount
+                    //イベントの通知スケジュールを設定する
+                    application.scheduledLocalNotifications = arrNotification
+                })
+            }else{
+                print("The app is not permitted to access reminders, make sure to grant permission in the settings and try again")
+            }
+        }
+    }
+    
     func applicationWillEnterForeground(application: UIApplication) {
         // Called as part of the transition from the background to the inactive state; here you can undo many of the changes made on entering the background.
     }

@@ -33,7 +33,7 @@ class ViewController: UIViewController {
         //ユーザーにカレンダーの使用許可を求める
         allowAuthorization()
         
-        NSTimer.scheduledTimerWithTimeInterval(60, target: self, selector: #selector(ViewController.updateAlert), userInfo: nil, repeats: true)
+        NSTimer.scheduledTimerWithTimeInterval(10, target: self, selector: #selector(ViewController.updateAlert), userInfo: nil, repeats: true)
 
     }
 
@@ -57,11 +57,11 @@ class ViewController: UIViewController {
     
     func updateAlert()
     {
-        
+       
         // リマインダーを取得する
         myEventStore.requestAccessToEntityType(EKEntityType.Reminder){
             (granted: Bool, error: NSError?) -> Void in
-            
+
             if granted{
                 // 2
                 let predicate = self.myEventStore.predicateForRemindersInCalendars(nil)
