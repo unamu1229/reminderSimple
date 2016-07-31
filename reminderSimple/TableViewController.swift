@@ -124,7 +124,7 @@ class TableViewController: UITableViewController {
         let reminder:EKReminder! = self.reminders![indexPath.row]
         cell.textLabel?.text = reminder.title
         let formatter:NSDateFormatter = NSDateFormatter()
-        formatter.dateFormat = "yyyy-MM-dd"
+        formatter.dateFormat = "yyyy年MM月dd日HH時mm分"
         if let dueDate = reminder.dueDateComponents?.date{
             cell.detailTextLabel?.text = formatter.stringFromDate(dueDate)
         }else{
