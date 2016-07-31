@@ -85,6 +85,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                                 if dueDate.compare(now) == NSComparisonResult.OrderedAscending{
                                     badgeCount += 1
                                 }
+                                notification.userInfo = ["notifyId":"通知を識別できる文字など"]
+                                arrNotification.append(notification)
                             }
                         }
                     }
