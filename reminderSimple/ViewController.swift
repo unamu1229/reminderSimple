@@ -33,7 +33,7 @@ class ViewController: UIViewController {
         //ユーザーにカレンダーの使用許可を求める
         allowAuthorization()
         
-        NSTimer.scheduledTimerWithTimeInterval(10, target: self, selector: #selector(ViewController.updateAlert), userInfo: nil, repeats: true)
+        NSTimer.scheduledTimerWithTimeInterval(1, target: self, selector: #selector(ViewController.updateAlert), userInfo: nil, repeats: true)
 
     }
 
@@ -67,23 +67,27 @@ class ViewController: UIViewController {
                 let predicate = self.myEventStore.predicateForRemindersInCalendars(nil)
                 self.myEventStore.fetchRemindersMatchingPredicate(predicate, completion: { (reminders: [EKReminder]?) -> Void in
                     
-                    let dateFormatter = NSDateFormatter()
-                    dateFormatter.dateFormat = "yyyy年MM月dd日HH時mm分"
                     let now = NSDate()
-                    for i in reminders! {
-                        if let dueDate = i.dueDateComponents?.date{
-                            let reminderFormatDate = dateFormatter.stringFromDate(dueDate)
-                            let nowFormatDate = dateFormatter.stringFromDate(now)
-                            print(nowFormatDate)
-                            print(reminderFormatDate)
-                            if reminderFormatDate == nowFormatDate {
-                                // メインスレッド 画面制御. 非同期.
-                                dispatch_async(dispatch_get_main_queue(), { () -> Void in
-                                  self.alert(i.title)
-                                })
+                    let secondFormatter = NSDateFormatter()
+                    secondFormatter.dateFormat = "ss"
+                    let nowSecond = secondFormatter.stringFromDate(now)
+                    print(nowSecond)
+                    if(nowSecond == "00"){
+                        let dateFormatter = NSDateFormatter()
+                        dateFormatter.dateFormat = "yyyy年MM月dd日HH時mm分"
+                        for i in reminders! {
+                            if let dueDate = i.dueDateComponents?.date{
+                                let reminderFormatDate = dateFormatter.stringFromDate(dueDate)
+                                let nowFormatDate = dateFormatter.stringFromDate(now)
+                                if reminderFormatDate == nowFormatDate {
+                                    // メインスレッド 画面制御. 非同期.
+                                    dispatch_async(dispatch_get_main_queue(), { () -> Void in
+                                        self.alert(i.title)
+                                    })
+                                }
                             }
                         }
-                    }
+                    }                    
                 })
             }else{
                 print("The app is not permitted to access reminders, make sure to grant permission in the settings and try again")
