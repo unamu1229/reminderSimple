@@ -94,6 +94,7 @@
                             </datePicker>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <gestureRecognizers/>
                         <constraints>
                             <constraint firstItem="DgO-E2-1lR" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="Eg8-io-2HR"/>
                             <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="DgO-E2-1lR" secondAttribute="bottom" constant="31" id="JEs-iL-xGh"/>
@@ -105,12 +106,20 @@
                             <constraint firstItem="Sxb-O5-KuW" firstAttribute="centerX" secondItem="yGI-5p-a4n" secondAttribute="centerX" id="iZV-mu-eER"/>
                             <constraint firstAttribute="trailing" secondItem="DgO-E2-1lR" secondAttribute="trailing" id="njz-9q-Vt0"/>
                         </constraints>
+                        <connections>
+                            <outletCollection property="gestureRecognizers" destination="1uF-wf-XQx" appends="YES" id="RKG-am-hPd"/>
+                        </connections>
                     </view>
                     <connections>
                         <outlet property="inputForm" destination="Sxb-O5-KuW" id="8Dh-H5-JBn"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
+                <tapGestureRecognizer id="1uF-wf-XQx">
+                    <connections>
+                        <action selector="tapScreen:" destination="BYZ-38-t0r" id="659-qU-Du7"/>
+                    </connections>
+                </tapGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="305" y="429"/>
         </scene>

@@ -19,12 +19,18 @@ class ViewController: UIViewController {
     
     @IBAction func datePicker(sender: UIDatePicker) {
         didChangeDate(sender)
+       
+    }
+    
+    @IBAction func tapScreen(sender: UITapGestureRecognizer) {
+        self.view.endEditing(true)
     }
     
     @IBAction func registar(sender: AnyObject) {
         myPlan = inputForm.text
         setMyPlanToReminder()
     }
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -71,7 +77,6 @@ class ViewController: UIViewController {
                     let secondFormatter = NSDateFormatter()
                     secondFormatter.dateFormat = "ss"
                     let nowSecond = secondFormatter.stringFromDate(now)
-                    print(nowSecond)
                     if(nowSecond == "00"){
                         let dateFormatter = NSDateFormatter()
                         dateFormatter.dateFormat = "yyyy年MM月dd日HH時mm分"
@@ -173,6 +178,14 @@ class ViewController: UIViewController {
         let myReminder = EKReminder(eventStore: myEventStore)
         //let  myTargetCalendar = EKCalendar(forEntityType: EKEntityType.Reminder, eventStore: myEventStore)
         let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+        if(myPlan == ""){
+            let myAlert = UIAlertController(title: "タスクを入力してください", message: "\(myPlan)", preferredStyle: UIAlertControllerStyle.Alert)
+            let okAlertAction = UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler: nil)
+            
+            myAlert.addAction(okAlertAction)
+            self.presentViewController(myAlert, animated: true, completion: nil)
+            return
+        }
         let dueDateComponents = appDelegate.dateComponentFromNSDate(myDate)
         myReminder.dueDateComponents = dueDateComponents
         myReminder.title = myPlan
