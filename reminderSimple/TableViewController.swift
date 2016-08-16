@@ -120,7 +120,8 @@ class TableViewController: UITableViewController {
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         
-        let cell:UITableViewCell! = tableView.dequeueReusableCellWithIdentifier("reminderCell")
+       // let cell:UITableViewCell! = tableView.dequeueReusableCellWithIdentifier("reminderCell")
+        let cell = UITableViewCell(style: UITableViewCellStyle.Subtitle, reuseIdentifier: "reminderCell")
         let reminder:EKReminder! = self.reminders![indexPath.row]
         cell.textLabel?.text = reminder.title
         let formatter:NSDateFormatter = NSDateFormatter()
