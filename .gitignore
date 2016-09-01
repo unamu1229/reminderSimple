@@ -2,3 +2,6 @@
 !*.xcodeproj/project.pbxproj
 !*.xcworkspace/contents.xcworkspacedata
 .DS_Store
+Pods/*
+*.xcworkspace
+Podfile.lock

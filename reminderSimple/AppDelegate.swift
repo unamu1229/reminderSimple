@@ -9,6 +9,7 @@
 import UIKit
 import CoreData
 import EventKit
+import RealmSwift
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -40,6 +41,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             UIUserNotificationSettings(forTypes: [.Sound, .Badge, .Alert], categories: nil)
         )
         
+        let config = Realm.Configuration(
+        schemaVersion: 3,
+        migrationBlock: { migration, oldSchemaVersion in
+            if(oldSchemaVersion < 3){
+            	
+            }
+        })
+        
+        Realm.Configuration.defaultConfiguration = config
+		let realm = try! Realm()
         return true
     }
 
@@ -51,54 +62,33 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func applicationDidEnterBackground(application: UIApplication) {
         // Use this method to release shared resources, save user data, invalidate timers, and store enough application state information to restore your application to its current state in case it is terminated later.
         // If your application supports background execution, this method is called instead of applicationWillTerminate: when the user quits.
+        
+        let realm = try! Realm()
+        let reminderResults = realm.objects(ReminderModel.self)
 
-        var myEventStore: EKEventStore! = EKEventStore()
-        // リマインダーを取得する
-        myEventStore.requestAccessToEntityType(EKEntityType.Reminder){
-            (granted: Bool, error: NSError?) -> Void in
+        var arrNotification:[UILocalNotification] = []
+        var badgeCount = 0
+        let now = NSDate()
+        for reminder in reminderResults {
+            let notification = UILocalNotification()
+            notification.alertBody = reminder.title
+            notification.fireDate = reminder.mydate
+            notification.soundName = UILocalNotificationDefaultSoundName
             
-            if granted{
-                // 2
-                let predicate = myEventStore.predicateForRemindersInCalendars(nil)
-                myEventStore.fetchRemindersMatchingPredicate(predicate, completion: { (reminders: [EKReminder]?) -> Void in
-                    
-                    var arrNotification:[UILocalNotification] = []
-                    var badgeCount = 0
-                    let dateFormatter = NSDateFormatter()
-                    dateFormatter.dateFormat = "yyyy年MM月dd日HH時mm分"
-                    let now = NSDate()
-                    for i in reminders! {
-                        if let dueDate = i.dueDateComponents?.date{
-                            let reminderFormatDate = dateFormatter.stringFromDate(dueDate)
-                            let nowFormatDate = dateFormatter.stringFromDate(now)
-                            if let dueDate = i.dueDateComponents?.date{
-                                let notification = UILocalNotification()
-                                let dateFormatter = NSDateFormatter()
-                                dateFormatter.locale = NSLocale(localeIdentifier: "ja_JP")
-                                dateFormatter.dateFormat = "yyyy年MM月dd日HH時mm分ss秒"
-                                notification.alertBody = i.title
-                                notification.fireDate = i.dueDateComponents?.date
-                                notification.soundName = UILocalNotificationDefaultSoundName
-                                
-                                let now = NSDate()
-                                
-                                if dueDate.compare(now) == NSComparisonResult.OrderedAscending{
-                                    badgeCount += 1
-                                }
-                                notification.userInfo = ["notifyId":"通知を識別できる文字など"]
-                                arrNotification.append(notification)
-                            }
-                        }
-                    }
-                    //バッチの数字を設定する
-                    application.applicationIconBadgeNumber = badgeCount
-                    //イベントの通知スケジュールを設定する
-                    application.scheduledLocalNotifications = arrNotification
-                })
-            }else{
-                print("The app is not permitted to access reminders, make sure to grant permission in the settings and try again")
+            let now = NSDate()
+            //NSComparisonResult.OrderedSameで同じ時間を検知したかったができなかった
+            //のでフラグで管理することにした。
+            if reminder.mydate!.compare(now) == NSComparisonResult.OrderedAscending {
+                badgeCount += 1
             }
+            notification.userInfo = ["notifyId":"通知を識別できる文字など"]
+            arrNotification.append(notification)
         }
+        //バッチの数字を設定する
+        application.applicationIconBadgeNumber = badgeCount
+        //イベントの通知スケジュールを設定する
+        application.scheduledLocalNotifications = arrNotification
+
     }
     
     func applicationWillEnterForeground(application: UIApplication) {

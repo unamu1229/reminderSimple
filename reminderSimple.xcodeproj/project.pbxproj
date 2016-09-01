@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0CFE65CA9F610B8138ED8C79 /* Pods_reminderSimpleTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 418171C1D5F4836664B16036 /* Pods_reminderSimpleTests.framework */; };
+		36A0A3CF0D3CCE4452E01A62 /* Pods_reminderSimple.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7EFA20211A5D788848F208C3 /* Pods_reminderSimple.framework */; };
 		F21E4F471D3B877F00179FEE /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F21E4F461D3B877F00179FEE /* AppDelegate.swift */; };
 		F21E4F491D3B877F00179FEE /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F21E4F481D3B877F00179FEE /* ViewController.swift */; };
 		F21E4F4C1D3B877F00179FEE /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F21E4F4A1D3B877F00179FEE /* Main.storyboard */; };
@@ -17,6 +19,8 @@
 		F21E4F6A1D3B878000179FEE /* reminderSimpleUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F21E4F691D3B878000179FEE /* reminderSimpleUITests.swift */; };
 		F21E4F781D3B90E300179FEE /* TableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F21E4F771D3B90E200179FEE /* TableViewController.swift */; };
 		F2AC41801D61983E005A02C4 /* Design.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2AC417F1D61983E005A02C4 /* Design.swift */; };
+		F2B824331D746503007E4C50 /* ReminderModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2B824321D746503007E4C50 /* ReminderModel.swift */; };
+		FE12B62D81165E8008728C3A /* Pods_reminderSimpleUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FA4D912B19D8E9CB8FBA66FB /* Pods_reminderSimpleUITests.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -37,6 +41,13 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		0EAB0D3C177F312D48D88927 /* Pods-reminderSimpleTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-reminderSimpleTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-reminderSimpleTests/Pods-reminderSimpleTests.release.xcconfig"; sourceTree = "<group>"; };
+		418171C1D5F4836664B16036 /* Pods_reminderSimpleTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_reminderSimpleTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		75E5376F6AB2A4DB9E313283 /* Pods-reminderSimple.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-reminderSimple.release.xcconfig"; path = "Pods/Target Support Files/Pods-reminderSimple/Pods-reminderSimple.release.xcconfig"; sourceTree = "<group>"; };
+		7EFA20211A5D788848F208C3 /* Pods_reminderSimple.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_reminderSimple.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		C1014A11594388A0F7864510 /* Pods-reminderSimple.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-reminderSimple.debug.xcconfig"; path = "Pods/Target Support Files/Pods-reminderSimple/Pods-reminderSimple.debug.xcconfig"; sourceTree = "<group>"; };
+		D6DE4CE8092179466085E422 /* Pods-reminderSimpleTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-reminderSimpleTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-reminderSimpleTests/Pods-reminderSimpleTests.debug.xcconfig"; sourceTree = "<group>"; };
+		E5CB87D5FFC22C86287EB2CB /* Pods-reminderSimpleUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-reminderSimpleUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-reminderSimpleUITests/Pods-reminderSimpleUITests.release.xcconfig"; sourceTree = "<group>"; };
 		F21E4F431D3B877F00179FEE /* reminderSimple.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = reminderSimple.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F21E4F461D3B877F00179FEE /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		F21E4F481D3B877F00179FEE /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -53,6 +64,9 @@
 		F21E4F6B1D3B878000179FEE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		F21E4F771D3B90E200179FEE /* TableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TableViewController.swift; sourceTree = "<group>"; };
 		F2AC417F1D61983E005A02C4 /* Design.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Design.swift; sourceTree = "<group>"; };
+		F2B824321D746503007E4C50 /* ReminderModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReminderModel.swift; sourceTree = "<group>"; };
+		FA4D912B19D8E9CB8FBA66FB /* Pods_reminderSimpleUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_reminderSimpleUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		FFF0D60E407C07AE0C3EFE61 /* Pods-reminderSimpleUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-reminderSimpleUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-reminderSimpleUITests/Pods-reminderSimpleUITests.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -60,6 +74,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				36A0A3CF0D3CCE4452E01A62 /* Pods_reminderSimple.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -67,6 +82,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0CFE65CA9F610B8138ED8C79 /* Pods_reminderSimpleTests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -74,12 +90,36 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FE12B62D81165E8008728C3A /* Pods_reminderSimpleUITests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		0AD9F08DB47267FDD24536DE /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				7EFA20211A5D788848F208C3 /* Pods_reminderSimple.framework */,
+				418171C1D5F4836664B16036 /* Pods_reminderSimpleTests.framework */,
+				FA4D912B19D8E9CB8FBA66FB /* Pods_reminderSimpleUITests.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		271196F99D5ED1B3D1DC382E /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				C1014A11594388A0F7864510 /* Pods-reminderSimple.debug.xcconfig */,
+				75E5376F6AB2A4DB9E313283 /* Pods-reminderSimple.release.xcconfig */,
+				D6DE4CE8092179466085E422 /* Pods-reminderSimpleTests.debug.xcconfig */,
+				0EAB0D3C177F312D48D88927 /* Pods-reminderSimpleTests.release.xcconfig */,
+				FFF0D60E407C07AE0C3EFE61 /* Pods-reminderSimpleUITests.debug.xcconfig */,
+				E5CB87D5FFC22C86287EB2CB /* Pods-reminderSimpleUITests.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
 		F21E4F3A1D3B877F00179FEE = {
 			isa = PBXGroup;
 			children = (
@@ -87,6 +127,8 @@
 				F21E4F5D1D3B878000179FEE /* reminderSimpleTests */,
 				F21E4F681D3B878000179FEE /* reminderSimpleUITests */,
 				F21E4F441D3B877F00179FEE /* Products */,
+				271196F99D5ED1B3D1DC382E /* Pods */,
+				0AD9F08DB47267FDD24536DE /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -104,6 +146,7 @@
 			isa = PBXGroup;
 			children = (
 				F21E4F461D3B877F00179FEE /* AppDelegate.swift */,
+				F2B824321D746503007E4C50 /* ReminderModel.swift */,
 				F21E4F481D3B877F00179FEE /* ViewController.swift */,
 				F21E4F4A1D3B877F00179FEE /* Main.storyboard */,
 				F21E4F771D3B90E200179FEE /* TableViewController.swift */,
@@ -141,9 +184,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = F21E4F6E1D3B878000179FEE /* Build configuration list for PBXNativeTarget "reminderSimple" */;
 			buildPhases = (
+				7AB5BD708C7E5448B34B0931 /* [CP] Check Pods Manifest.lock */,
 				F21E4F3F1D3B877F00179FEE /* Sources */,
 				F21E4F401D3B877F00179FEE /* Frameworks */,
 				F21E4F411D3B877F00179FEE /* Resources */,
+				EADA5D7A62D0BBB7B2C56E91 /* [CP] Embed Pods Frameworks */,
+				51ECA750F1E01AFF81EA237C /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -158,9 +204,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = F21E4F711D3B878000179FEE /* Build configuration list for PBXNativeTarget "reminderSimpleTests" */;
 			buildPhases = (
+				8BFEC0D72C0EF1C09E76AAC7 /* [CP] Check Pods Manifest.lock */,
 				F21E4F561D3B878000179FEE /* Sources */,
 				F21E4F571D3B878000179FEE /* Frameworks */,
 				F21E4F581D3B878000179FEE /* Resources */,
+				C7E95D9587B05345CA48EA35 /* [CP] Embed Pods Frameworks */,
+				9521596541B2256E0F1D9830 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -176,9 +225,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = F21E4F741D3B878000179FEE /* Build configuration list for PBXNativeTarget "reminderSimpleUITests" */;
 			buildPhases = (
+				66103CD3FD1BEFD37CBCD32E /* [CP] Check Pods Manifest.lock */,
 				F21E4F611D3B878000179FEE /* Sources */,
 				F21E4F621D3B878000179FEE /* Frameworks */,
 				F21E4F631D3B878000179FEE /* Resources */,
+				9D24169D5FBC3A0E7E6BBEDB /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -261,6 +312,129 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		51ECA750F1E01AFF81EA237C /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-reminderSimple/Pods-reminderSimple-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		66103CD3FD1BEFD37CBCD32E /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		7AB5BD708C7E5448B34B0931 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		8BFEC0D72C0EF1C09E76AAC7 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		9521596541B2256E0F1D9830 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-reminderSimpleTests/Pods-reminderSimpleTests-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		9D24169D5FBC3A0E7E6BBEDB /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-reminderSimpleUITests/Pods-reminderSimpleUITests-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		C7E95D9587B05345CA48EA35 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-reminderSimpleTests/Pods-reminderSimpleTests-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		EADA5D7A62D0BBB7B2C56E91 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-reminderSimple/Pods-reminderSimple-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		F21E4F3F1D3B877F00179FEE /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
@@ -271,6 +445,7 @@
 				F21E4F471D3B877F00179FEE /* AppDelegate.swift in Sources */,
 				F21E4F781D3B90E300179FEE /* TableViewController.swift in Sources */,
 				F2AC41801D61983E005A02C4 /* Design.swift in Sources */,
+				F2B824331D746503007E4C50 /* ReminderModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -410,6 +585,7 @@
 		};
 		F21E4F6F1D3B878000179FEE /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = C1014A11594388A0F7864510 /* Pods-reminderSimple.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
@@ -424,6 +600,7 @@
 		};
 		F21E4F701D3B878000179FEE /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 75E5376F6AB2A4DB9E313283 /* Pods-reminderSimple.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
@@ -438,6 +615,7 @@
 		};
 		F21E4F721D3B878000179FEE /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = D6DE4CE8092179466085E422 /* Pods-reminderSimpleTests.debug.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				INFOPLIST_FILE = reminderSimpleTests/Info.plist;
@@ -450,6 +628,7 @@
 		};
 		F21E4F731D3B878000179FEE /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 0EAB0D3C177F312D48D88927 /* Pods-reminderSimpleTests.release.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				INFOPLIST_FILE = reminderSimpleTests/Info.plist;
@@ -462,6 +641,7 @@
 		};
 		F21E4F751D3B878000179FEE /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = FFF0D60E407C07AE0C3EFE61 /* Pods-reminderSimpleUITests.debug.xcconfig */;
 			buildSettings = {
 				INFOPLIST_FILE = reminderSimpleUITests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
@@ -473,6 +653,7 @@
 		};
 		F21E4F761D3B878000179FEE /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = E5CB87D5FFC22C86287EB2CB /* Pods-reminderSimpleUITests.release.xcconfig */;
 			buildSettings = {
 				INFOPLIST_FILE = reminderSimpleUITests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";

@@ -8,11 +8,13 @@
 
 import UIKit
 import EventKit
+import RealmSwift
 
 class TableViewController: UITableViewController {
     
     var eventStore: EKEventStore! = EKEventStore()
     var reminders: [EKReminder]! = [EKReminder]()
+    var reminderResults:Results<ReminderModel>?
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -27,23 +29,14 @@ class TableViewController: UITableViewController {
     }
     
     override func viewWillAppear(animated: Bool) {
-        
-        eventStore.requestAccessToEntityType(EKEntityType.Reminder) { (granted: Bool, error: NSError?) -> Void in
-            
-            if granted{
-                let predicate = self.eventStore.predicateForRemindersInCalendars(nil)
-                self.eventStore.fetchRemindersMatchingPredicate(predicate, completion: { (reminders: [EKReminder]?) -> Void in
-                    
-                    self.reminders = reminders
-                    dispatch_async(dispatch_get_main_queue()) {
-                        self.tableView.reloadData()
-                    }
-                })
-            }else{
-                print("The app is not permitted to access reminders, make sure to grant permission in the settings and try again")
-            }
+        let realm = try! Realm()
+        reminderResults = realm.objects(ReminderModel.self)
+        print(reminderResults.dynamicType)
+        for reminder in reminderResults! {
+            print(reminder.title)
+            print(reminder.mydate)
         }
-        
+        self.tableView.reloadData()
     }
 
     override func didReceiveMemoryWarning() {
@@ -60,7 +53,7 @@ class TableViewController: UITableViewController {
 
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-          return reminders.count
+          return reminderResults!.count
     }
 
     /*
@@ -81,17 +74,23 @@ class TableViewController: UITableViewController {
     }
     */
 
-    /*
+
     // Override to support editing the table view.
     override func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
         if editingStyle == .Delete {
             // Delete the row from the data source
+            let realm = try! Realm()
+            realm.beginWrite()
+            realm.delete(reminderResults![indexPath.row])
+            try! realm.commitWrite()
+            
+            //tabelのセルをアニメーションで消す
             tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Fade)
         } else if editingStyle == .Insert {
             // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
         }    
     }
-    */
+    
 
     /*
     // Override to support rearranging the table view.
@@ -120,31 +119,22 @@ class TableViewController: UITableViewController {
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         
-       // let cell:UITableViewCell! = tableView.dequeueReusableCellWithIdentifier("reminderCell")
         let cell = UITableViewCell(style: UITableViewCellStyle.Subtitle, reuseIdentifier: "reminderCell")
-        let reminder:EKReminder! = self.reminders![indexPath.row]
-        cell.textLabel?.text = reminder.title
+        
+        if let dueDate = reminderResults![indexPath.row].mydate {
+            let now = NSDate()
+            if dueDate.compare(now) == NSComparisonResult.OrderedAscending {
+                cell.textLabel?.textColor = UIColor.redColor()
+            }
+        }
+
+        cell.textLabel?.text = reminderResults![indexPath.row].title
+        
         let formatter:NSDateFormatter = NSDateFormatter()
         formatter.dateFormat = "yyyy年MM月dd日HH時mm分"
-        if let dueDate = reminder.dueDateComponents?.date{
-            cell.detailTextLabel?.text = formatter.stringFromDate(dueDate)
-        }else{
-            cell.detailTextLabel?.text = "N/A"
-        }
+        cell.detailTextLabel?.text = formatter.stringFromDate(reminderResults![indexPath.row].mydate!)
+
         return cell
-    }
-    
-    //テーブルのセルをスワイプして削除する
-    override func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
-        
-        let reminder: EKReminder = reminders[indexPath.row]
-        do{
-            try eventStore.removeReminder(reminder, commit: true)
-            self.reminders.removeAtIndex(indexPath.row)
-            tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: UITableViewRowAnimation.Fade)
-        }catch{
-            print("An error occurred while removing the reminder from the Calendar database: \(error)")
-        }
     }
 
 }

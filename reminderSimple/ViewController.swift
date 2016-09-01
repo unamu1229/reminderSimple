@@ -8,6 +8,7 @@
 
 import UIKit
 import EventKit
+import RealmSwift
 
 class ViewController: UIViewController {
     
@@ -36,9 +37,6 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
         
-        //ユーザーにカレンダーの使用許可を求める
-        allowAuthorization()
-        
         NSTimer.scheduledTimerWithTimeInterval(1, target: self, selector: #selector(ViewController.updateAlert), userInfo: nil, repeats: true)
 
     }
@@ -61,41 +59,23 @@ class ViewController: UIViewController {
         myDate = NSDate(timeInterval: 0, sinceDate: mySelectDate)
     }
     
-    func updateAlert()
-    {
-       
-        // リマインダーを取得する
-        myEventStore.requestAccessToEntityType(EKEntityType.Reminder){
-            (granted: Bool, error: NSError?) -> Void in
-
-            if granted{
-                // 2
-                let predicate = self.myEventStore.predicateForRemindersInCalendars(nil)
-                self.myEventStore.fetchRemindersMatchingPredicate(predicate, completion: { (reminders: [EKReminder]?) -> Void in
-                    
+    func updateAlert(){
+        let realm = try! Realm()
+        let reminderResults = realm.objects(ReminderModel.self)
+        print(reminderResults.dynamicType)
+        for reminder in reminderResults {
+            if reminder.alertflg == false {
+                if let dueDate = reminder.mydate {
                     let now = NSDate()
-                    let secondFormatter = NSDateFormatter()
-                    secondFormatter.dateFormat = "ss"
-                    let nowSecond = secondFormatter.stringFromDate(now)
-                    if(nowSecond == "00"){
-                        let dateFormatter = NSDateFormatter()
-                        dateFormatter.dateFormat = "yyyy年MM月dd日HH時mm分"
-                        for i in reminders! {
-                            if let dueDate = i.dueDateComponents?.date{
-                                let reminderFormatDate = dateFormatter.stringFromDate(dueDate)
-                                let nowFormatDate = dateFormatter.stringFromDate(now)
-                                if reminderFormatDate == nowFormatDate {
-                                    // メインスレッド 画面制御. 非同期.
-                                    dispatch_async(dispatch_get_main_queue(), { () -> Void in
-                                        self.alert(i.title)
-                                    })
-                                }
-                            }
+                    //NSComparisonResult.OrderedSameで同じ時間を検知したかったができなかった
+                    //のでフラグで管理することにした。
+                    if dueDate.compare(now) == NSComparisonResult.OrderedAscending {
+                        self.alert(reminder.title)
+                        try! realm.write {
+                            reminder.alertflg = true
                         }
-                    }                    
-                })
-            }else{
-                print("The app is not permitted to access reminders, make sure to grant permission in the settings and try again")
+                    }
+                }
             }
         }
     }
@@ -107,122 +87,32 @@ class ViewController: UIViewController {
         presentViewController(myAlert, animated: true, completion: nil)
     }
     
-    func getAuthorization_status() -> Bool {
-        
-        let status: EKAuthorizationStatus = EKEventStore.authorizationStatusForEntityType(EKEntityType.Event)
-        
-        switch status {
-        case EKAuthorizationStatus.NotDetermined:
-            print("NotDetermined")
-            return false
-            
-        case EKAuthorizationStatus.Denied:
-            print("Denied")
-            return false
-            
-        case EKAuthorizationStatus.Authorized:
-            print("Authorized")
-            return true
-            
-        case EKAuthorizationStatus.Restricted:
-            print("Restricted")
-            return false
-            
-        default:
-            print("error")
-            return false
-        }
-        
-    }
-    
-    /*
-     認証許可.
-     */
-    func allowAuthorization() {
-        
-        // 許可されていなかった場合、認証許可を求める.
-        if getAuthorization_status() {
-            return
-        } else {
-            
-            // ユーザーに許可を求める.
-            myEventStore.requestAccessToEntityType(EKEntityType.Event, completion: {
-                (granted , error) -> Void in
-                
-                // 許可を得られなかった場合アラート発動.
-                if granted {
-                    return
-                }
-                else {
-                    
-                    // メインスレッド 画面制御. 非同期.
-                    dispatch_async(dispatch_get_main_queue(), { () -> Void in
-                        
-                        // アラート生成.
-                        let myAlert = UIAlertController(title: "許可されませんでした", message: "Privacy->App->Reminderで変更してください", preferredStyle: UIAlertControllerStyle.Alert)
-                        
-                        // アラートアクション.
-                        let okAction = UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler: nil)
-                        
-                        myAlert.addAction(okAction)
-                        self.presentViewController(myAlert, animated: true, completion: nil)
-                    })
-                }
-            })
-        }
-    }
-    
     func setMyPlanToReminder() {
         
-        // イベントを作成する.
-        let myReminder = EKReminder(eventStore: myEventStore)
-        //let  myTargetCalendar = EKCalendar(forEntityType: EKEntityType.Reminder, eventStore: myEventStore)
-        let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+        let myAlert:UIAlertController!
+        
         if(myPlan == ""){
-            let myAlert = UIAlertController(title: "タスクを入力してください", message: "\(myPlan)", preferredStyle: UIAlertControllerStyle.Alert)
-            let okAlertAction = UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler: nil)
-            
-            myAlert.addAction(okAlertAction)
-            self.presentViewController(myAlert, animated: true, completion: nil)
-            return
-        }
-        let dueDateComponents = appDelegate.dateComponentFromNSDate(myDate)
-        myReminder.dueDateComponents = dueDateComponents
-        myReminder.title = myPlan
-        myReminder.calendar = myEventStore.defaultCalendarForNewReminders()
-        // 一日中.
-        // myEvent.allDay = true
-        
-        // イベントを保存.
-        
-        let result: Bool
-        do {
-            try myEventStore.saveReminder(myReminder, commit: true)
-            result = true
-        } catch let error1 as NSError {
-            print(error1)
-            result = false
-        }
-        
-        // 保存成功・不成功でアラート発生.
-        if result {
-            
-            let myAlert = UIAlertController(title: "保存に成功しました", message: "\(myPlan)", preferredStyle: UIAlertControllerStyle.Alert)
-            
-            let okAlertAction = UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler: nil)
-            
-            myAlert.addAction(okAlertAction)
-            self.presentViewController(myAlert, animated: true, completion: nil)
-            
+            myAlert = UIAlertController(title: "タスクを入力してください", message: "\(myPlan)", preferredStyle: UIAlertControllerStyle.Alert)
         } else {
+            let reminderModel = ReminderModel()
+            reminderModel.title = myPlan
+            reminderModel.mydate = myDate
+            let realm = try! Realm()
+            print(realm.configuration.fileURL)
             
-            let myAlert = UIAlertController(title: "保存に失敗しました", message: " \(myPlan)", preferredStyle: UIAlertControllerStyle.Alert)
+            do {
+                try realm.write {
+                    realm.add(reminderModel)
+                }
+                myAlert = UIAlertController(title: "保存に成功しました", message: "\(myPlan)", preferredStyle: UIAlertControllerStyle.Alert)
+            } catch {
+                myAlert = UIAlertController(title: "保存に失敗しました", message: " \(myPlan)", preferredStyle: UIAlertControllerStyle.Alert)
+            }
             
-            let okAlertAction = UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler: nil)
-            
-            myAlert.addAction(okAlertAction)
-            self.presentViewController(myAlert, animated: true, completion: nil)
         }
+        let okAlertAction = UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler: nil)
+        myAlert.addAction(okAlertAction)
+        self.presentViewController(myAlert, animated: true, completion: nil)
     }
     
 }
