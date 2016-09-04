@@ -15,6 +15,47 @@ class TableViewController: UITableViewController {
     var eventStore: EKEventStore! = EKEventStore()
     var reminders: [EKReminder]! = [EKReminder]()
     var reminderResults:Results<ReminderModel>?
+    
+    // Buttonを拡張する.
+    override func tableView(tableView: UITableView, editActionsForRowAtIndexPath indexPath: NSIndexPath) -> [UITableViewRowAction]? {
+        // Shareボタン.
+        let myShareButton: UITableViewRowAction = UITableViewRowAction(style: .Normal, title: "実行済み") { (action, index) -> Void in
+            
+            tableView.editing = false
+            print("share")
+            
+        }
+        myShareButton.backgroundColor = UIColor.blueColor()
+        
+        // Archiveボタン.
+        let myArchiveButton: UITableViewRowAction = UITableViewRowAction(style: .Normal, title: "編集") { (action, index) -> Void in
+            
+            tableView.editing = false
+            print("archive")
+            
+        }
+        myArchiveButton.backgroundColor = UIColor.grayColor()
+        
+        // Deleteボタン.
+        let myDeleteButton: UITableViewRowAction = UITableViewRowAction(style: .Normal, title: "削除") { (action, index) -> Void in
+            
+            tableView.editing = false
+            print("delete")
+            // Delete the row from the data source
+            let realm = try! Realm()
+            realm.beginWrite()
+            realm.delete(self.reminderResults![indexPath.row])
+            try! realm.commitWrite()
+            
+            //tabelのセルをアニメーションで消す
+            tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Fade)
+            
+        }
+        myDeleteButton.backgroundColor = UIColor.redColor()
+        
+        return [myShareButton, myArchiveButton, myDeleteButton]
+        
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -24,14 +65,14 @@ class TableViewController: UITableViewController {
         // self.clearsSelectionOnViewWillAppear = false
 
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-        // self.navigationItem.rightBarButtonItem = self.editButtonItem()
-    
+        //self.navigationItem.rightBarButtonItem = self.editButtonItem()
+        
     }
     
     override func viewWillAppear(animated: Bool) {
         let realm = try! Realm()
         reminderResults = realm.objects(ReminderModel.self)
-        print(reminderResults.dynamicType)
+        print(reminderResults)
         for reminder in reminderResults! {
             print(reminder.title)
             print(reminder.mydate)
@@ -53,18 +94,36 @@ class TableViewController: UITableViewController {
 
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-          return reminderResults!.count
+        if let val = reminderResults {
+             return val.count
+        }
+        return 0
     }
 
-    /*
+    
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("reuseIdentifier", forIndexPath: indexPath)
-
-        // Configure the cell...
-
+        //let cell = tableView.dequeueReusableCellWithIdentifier("reminderCell", forIndexPath: indexPath)
+        
+        let cell = UITableViewCell(style: UITableViewCellStyle.Subtitle, reuseIdentifier: "reminderCell")
+        
+        if let dueDate = reminderResults![indexPath.row].mydate {
+            let now = NSDate()
+            if dueDate.compare(now) == NSComparisonResult.OrderedAscending {
+                cell.textLabel?.textColor = UIColor.redColor()
+            }
+        }
+        
+        cell.textLabel?.text = reminderResults![indexPath.row].title
+        
+        let formatter:NSDateFormatter = NSDateFormatter()
+        formatter.dateFormat = "yyyy年MM月dd日HH時mm分"
+        cell.detailTextLabel?.text = formatter.stringFromDate(reminderResults![indexPath.row].mydate!)
+        
+        //cell.accessoryType = .Detail
+        
         return cell
     }
-    */
+    
 
     /*
     // Override to support conditional editing of the table view.
@@ -90,7 +149,6 @@ class TableViewController: UITableViewController {
             // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
         }    
     }
-    
 
     /*
     // Override to support rearranging the table view.
@@ -116,25 +174,5 @@ class TableViewController: UITableViewController {
         // Pass the selected object to the new view controller.
     }
     */
-    
-    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        
-        let cell = UITableViewCell(style: UITableViewCellStyle.Subtitle, reuseIdentifier: "reminderCell")
-        
-        if let dueDate = reminderResults![indexPath.row].mydate {
-            let now = NSDate()
-            if dueDate.compare(now) == NSComparisonResult.OrderedAscending {
-                cell.textLabel?.textColor = UIColor.redColor()
-            }
-        }
-
-        cell.textLabel?.text = reminderResults![indexPath.row].title
-        
-        let formatter:NSDateFormatter = NSDateFormatter()
-        formatter.dateFormat = "yyyy年MM月dd日HH時mm分"
-        cell.detailTextLabel?.text = formatter.stringFromDate(reminderResults![indexPath.row].mydate!)
-
-        return cell
-    }
 
 }
