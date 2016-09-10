@@ -1,8 +1,8 @@
 //
-//  TableViewController.swift
+//  DoedTableViewController.swift
 //  reminderSimple
 //
-//  Created by 米田宏 on 2016/07/17.
+//  Created by 米田宏 on 2016/09/05.
 //  Copyright © 2016年 hiroshiyoneda. All rights reserved.
 //
 
@@ -10,7 +10,7 @@ import UIKit
 import EventKit
 import RealmSwift
 
-class TableViewController: UITableViewController {
+class DoedTableViewController: UITableViewController {
     
     var eventStore: EKEventStore! = EKEventStore()
     var reminders: [EKReminder]! = [EKReminder]()
@@ -20,17 +20,17 @@ class TableViewController: UITableViewController {
     // Buttonを拡張する.
     override func tableView(tableView: UITableView, editActionsForRowAtIndexPath indexPath: NSIndexPath) -> [UITableViewRowAction]? {
         
-        // 実行済みボタン.
-        let doedButton: UITableViewRowAction = UITableViewRowAction(style: .Normal, title: "実行済み") { (action, index) -> Void in
+        // 未実行に戻すボタン.
+        let yetButton: UITableViewRowAction = UITableViewRowAction(style: .Normal, title: "未実行に戻す") { (action, index) -> Void in
             
             tableView.editing = false
             print("doed")
             try! self.realm.write {
-                self.reminderResults![indexPath.row].doflg = true
+                self.reminderResults![indexPath.row].doflg = false
             }
             tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Fade)
         }
-        doedButton.backgroundColor = UIColor.blueColor()
+        yetButton.backgroundColor = UIColor.blueColor()
         
         // 編集ボタン.
         let editButton: UITableViewRowAction = UITableViewRowAction(style: .Normal, title: "編集") { (action, index) -> Void in
@@ -42,6 +42,7 @@ class TableViewController: UITableViewController {
             let detailViewController = storyboard.instantiateViewControllerWithIdentifier("detail") as! DetailViewController
             detailViewController.id = self.reminderResults![indexPath.row].id
             self.presentViewController(detailViewController, animated: true, completion: nil)
+            
         }
         editButton.backgroundColor = UIColor.grayColor()
         
@@ -62,17 +63,17 @@ class TableViewController: UITableViewController {
         }
         deleteButton.backgroundColor = UIColor.redColor()
         
-        return [doedButton, editButton, deleteButton]
+        return [yetButton, editButton, deleteButton]
         
     }
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.tableView.dataSource = self
         self.tableView.delegate = self
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
-
+        
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
         //self.navigationItem.rightBarButtonItem = self.editButtonItem()
         
@@ -80,7 +81,7 @@ class TableViewController: UITableViewController {
     
     override func viewWillAppear(animated: Bool) {
         let realm = try! Realm()
-        reminderResults = realm.objects(ReminderModel.self).filter("doflg == false")
+        reminderResults = realm.objects(ReminderModel.self).filter("doflg == true")
         print(reminderResults)
         for reminder in reminderResults! {
             print(reminder.title)
@@ -88,27 +89,27 @@ class TableViewController: UITableViewController {
         }
         self.tableView.reloadData()
     }
-
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-
+    
     // MARK: - Table view data source
-
+    
     override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         // #warning Incomplete implementation, return the number of sections
         return 1
     }
-
+    
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
         if let val = reminderResults {
-             return val.count
+            return val.count
         }
         return 0
     }
-
+    
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         //let cell = tableView.dequeueReusableCellWithIdentifier("reminderCell", forIndexPath: indexPath)
@@ -133,16 +134,16 @@ class TableViewController: UITableViewController {
         return cell
     }
     
-
+    
     /*
-    // Override to support conditional editing of the table view.
-    override func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool {
-        // Return false if you do not want the specified item to be editable.
-        return true
-    }
-    */
-
-
+     // Override to support conditional editing of the table view.
+     override func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool {
+     // Return false if you do not want the specified item to be editable.
+     return true
+     }
+     */
+    
+    
     // Override to support editing the table view.
     override func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
         if editingStyle == .Delete {
@@ -156,32 +157,32 @@ class TableViewController: UITableViewController {
             tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Fade)
         } else if editingStyle == .Insert {
             // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-        }    
+        }
     }
-
+    
     /*
-    // Override to support rearranging the table view.
-    override func tableView(tableView: UITableView, moveRowAtIndexPath fromIndexPath: NSIndexPath, toIndexPath: NSIndexPath) {
-
-    }
-    */
-
+     // Override to support rearranging the table view.
+     override func tableView(tableView: UITableView, moveRowAtIndexPath fromIndexPath: NSIndexPath, toIndexPath: NSIndexPath) {
+     
+     }
+     */
+    
     /*
-    // Override to support conditional rearranging of the table view.
-    override func tableView(tableView: UITableView, canMoveRowAtIndexPath indexPath: NSIndexPath) -> Bool {
-        // Return false if you do not want the item to be re-orderable.
-        return true
-    }
-    */
-
+     // Override to support conditional rearranging of the table view.
+     override func tableView(tableView: UITableView, canMoveRowAtIndexPath indexPath: NSIndexPath) -> Bool {
+     // Return false if you do not want the item to be re-orderable.
+     return true
+     }
+     */
+    
     /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
+     // MARK: - Navigation
+     
+     // In a storyboard-based application, you will often want to do a little preparation before navigation
+     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+     // Get the new view controller using segue.destinationViewController.
+     // Pass the selected object to the new view controller.
+     }
+     */
+    
 }

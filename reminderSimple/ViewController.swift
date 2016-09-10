@@ -61,8 +61,7 @@ class ViewController: UIViewController {
     
     func updateAlert(){
         let realm = try! Realm()
-        let reminderResults = realm.objects(ReminderModel.self)
-        print(reminderResults.dynamicType)
+        let reminderResults = realm.objects(ReminderModel.self)        
         for reminder in reminderResults {
             if reminder.alertflg == false {
                 if let dueDate = reminder.mydate {
@@ -95,6 +94,7 @@ class ViewController: UIViewController {
             myAlert = UIAlertController(title: "タスクを入力してください", message: "\(myPlan)", preferredStyle: UIAlertControllerStyle.Alert)
         } else {
             let reminderModel = ReminderModel()
+            reminderModel.id = reminderModel.lastId()
             reminderModel.title = myPlan
             reminderModel.mydate = myDate
             let realm = try! Realm()
