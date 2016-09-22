@@ -3,6 +3,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
         <!--Table View Controller-->
@@ -61,43 +62,62 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="nDe-di-QqW" customClass="CustomTextView" customModule="reminderSimple" customModuleProvider="target">
+                                <rect key="frame" x="30" y="84" width="540" height="160"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="160" id="wA0-gH-Rrr"/>
+                                </constraints>
+                                <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                        <real key="value" value="7"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
+                                        <integer key="value" value="1"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
+                                        <color key="value" white="0.75" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                            </textView>
+                            <datePicker contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="dateAndTime" minuteInterval="1" translatesAutoresizingMaskIntoConstraints="NO" id="EpY-De-8ds">
+                                <rect key="frame" x="0.0" y="284" width="600" height="216"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="216" id="VSZ-ej-ojQ"/>
+                                    <constraint firstAttribute="width" constant="600" id="s9x-ix-Dei"/>
+                                </constraints>
+                                <date key="date" timeIntervalSinceReferenceDate="495211634.036107">
+                                    <!--2016-09-10 14:47:14 +0000-->
+                                </date>
+                            </datePicker>
                             <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Ggm-M0-aoc">
-                                <rect key="frame" x="0.0" y="0.0" width="600" height="44"/>
+                                <rect key="frame" x="0.0" y="20" width="600" height="44"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="44" id="iON-jx-Jrw"/>
+                                </constraints>
                                 <items>
-                                    <barButtonItem title="戻る" id="hiI-9e-Kc7">
+                                    <barButtonItem title="戻る" width="50" id="hiI-9e-Kc7">
                                         <connections>
                                             <action selector="backPage:" destination="TPl-xX-0yD" id="xt2-vN-Uon"/>
                                         </connections>
                                     </barButtonItem>
                                 </items>
                             </toolbar>
-                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="nDe-di-QqW">
-                                <rect key="frame" x="0.0" y="44" width="600" height="164"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
-                            </textView>
-                            <datePicker contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="dateAndTime" minuteInterval="1" translatesAutoresizingMaskIntoConstraints="NO" id="EpY-De-8ds">
-                                <rect key="frame" x="0.0" y="229" width="600" height="216"/>
-                                <date key="date" timeIntervalSinceReferenceDate="495211634.036107">
-                                    <!--2016-09-10 14:47:14 +0000-->
-                                </date>
-                            </datePicker>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <gestureRecognizers/>
                         <constraints>
-                            <constraint firstItem="EpY-De-8ds" firstAttribute="top" secondItem="nDe-di-QqW" secondAttribute="bottom" constant="21" id="1f9-Ct-c8J"/>
-                            <constraint firstItem="Ggm-M0-aoc" firstAttribute="leading" secondItem="maF-7j-eJ9" secondAttribute="leading" id="EbN-nc-5B5"/>
-                            <constraint firstItem="Ggm-M0-aoc" firstAttribute="trailing" secondItem="nDe-di-QqW" secondAttribute="trailing" id="Q3i-yi-GG8"/>
-                            <constraint firstItem="Ggm-M0-aoc" firstAttribute="top" secondItem="maF-7j-eJ9" secondAttribute="top" id="RUL-ca-u7K"/>
-                            <constraint firstItem="3Zn-l1-iiZ" firstAttribute="top" secondItem="EpY-De-8ds" secondAttribute="bottom" constant="111" id="SDD-PE-vjW"/>
-                            <constraint firstItem="nDe-di-QqW" firstAttribute="trailing" secondItem="EpY-De-8ds" secondAttribute="trailing" id="YvC-Gi-tx6"/>
-                            <constraint firstItem="nDe-di-QqW" firstAttribute="top" secondItem="Ggm-M0-aoc" secondAttribute="bottom" id="Zdf-pt-cqe"/>
-                            <constraint firstItem="Ggm-M0-aoc" firstAttribute="leading" secondItem="nDe-di-QqW" secondAttribute="leading" id="hvU-Jb-Lok"/>
-                            <constraint firstItem="nDe-di-QqW" firstAttribute="leading" secondItem="EpY-De-8ds" secondAttribute="leading" id="lAP-vG-2LX"/>
-                            <constraint firstAttribute="trailing" secondItem="Ggm-M0-aoc" secondAttribute="trailing" id="sHh-yN-M1e"/>
+                            <constraint firstItem="nDe-di-QqW" firstAttribute="top" secondItem="Ggm-M0-aoc" secondAttribute="bottom" constant="20" id="3V8-hY-3co"/>
+                            <constraint firstItem="EpY-De-8ds" firstAttribute="centerX" secondItem="maF-7j-eJ9" secondAttribute="centerX" id="AEV-X2-cwJ"/>
+                            <constraint firstItem="EpY-De-8ds" firstAttribute="top" secondItem="nDe-di-QqW" secondAttribute="bottom" constant="40" id="Dag-Sl-CQG"/>
+                            <constraint firstAttribute="trailing" secondItem="Ggm-M0-aoc" secondAttribute="trailing" id="QUh-M2-qo5"/>
+                            <constraint firstItem="Ggm-M0-aoc" firstAttribute="leading" secondItem="maF-7j-eJ9" secondAttribute="leading" id="VSs-9H-9Ys"/>
+                            <constraint firstItem="Ggm-M0-aoc" firstAttribute="top" secondItem="cA0-hm-148" secondAttribute="bottom" id="ZhP-4n-edX"/>
+                            <constraint firstItem="nDe-di-QqW" firstAttribute="leading" secondItem="maF-7j-eJ9" secondAttribute="leadingMargin" constant="10" id="utO-BL-3KP"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="nDe-di-QqW" secondAttribute="trailing" constant="10" id="zBI-Nt-Ug6"/>
                         </constraints>
                         <connections>
                             <outletCollection property="gestureRecognizers" destination="OrP-Cj-iq3" appends="YES" id="PXs-kI-g8i"/>
@@ -117,7 +137,7 @@
                     </connections>
                 </tapGestureRecognizer>
             </objects>
-            <point key="canvasLocation" x="1721" y="890"/>
+            <point key="canvasLocation" x="1726" y="879"/>
         </scene>
         <!--Doed Table View Controller-->
         <scene sceneID="giw-BU-JQz">
