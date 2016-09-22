@@ -159,12 +159,14 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="srn-Hy-7qO" customClass="CustomButton" customModule="reminderSimple" customModuleProvider="target">
-                                <rect key="frame" x="185" y="517" width="230" height="45"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="characterWrap" translatesAutoresizingMaskIntoConstraints="NO" id="srn-Hy-7qO" customClass="CustomButton" customModule="reminderSimple" customModuleProvider="target">
+                                <rect key="frame" x="305" y="117" width="110" height="60"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="45" id="tOd-w7-ZNX"/>
+                                    <constraint firstAttribute="width" constant="110" id="JSh-ra-eQ7"/>
                                 </constraints>
-                                <state key="normal" title="実行済みタスク一覧">
+                                <state key="normal">
+                                    <string key="title">実行済み
+タスク一覧</string>
                                     <color key="titleColor" white="0.5" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                                 </state>
                                 <userDefinedRuntimeAttributes>
@@ -196,30 +198,6 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WiE-Cl-dNZ" customClass="CustomButton" customModule="reminderSimple" customModuleProvider="target">
-                                <rect key="frame" x="185" y="136" width="230" height="45"/>
-                                <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="45" id="8kk-B0-VtN"/>
-                                    <constraint firstAttribute="width" constant="230" id="bbn-4h-fhy"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="15"/>
-                                <state key="normal" title="タスク一覧を表示する"/>
-                                <userDefinedRuntimeAttributes>
-                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
-                                        <real key="value" value="7"/>
-                                    </userDefinedRuntimeAttribute>
-                                    <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
-                                        <color key="value" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                    </userDefinedRuntimeAttribute>
-                                    <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
-                                        <real key="value" value="1"/>
-                                    </userDefinedRuntimeAttribute>
-                                </userDefinedRuntimeAttributes>
-                                <connections>
-                                    <segue destination="LwN-6D-9lf" kind="show" id="WTb-3b-eAs"/>
-                                </connections>
-                            </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yGI-5p-a4n" customClass="CustomButton" customModule="reminderSimple" customModuleProvider="target">
                                 <rect key="frame" x="185" y="250" width="230" height="45"/>
                                 <constraints>
@@ -241,30 +219,68 @@
                                     <action selector="registar:" destination="BYZ-38-t0r" eventType="touchUpInside" id="R4T-lD-MWV"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="characterWrap" translatesAutoresizingMaskIntoConstraints="NO" id="WiE-Cl-dNZ" customClass="CustomButton" customModule="reminderSimple" customModuleProvider="target">
+                                <rect key="frame" x="185" y="117" width="110" height="60"/>
+                                <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="60" id="3OV-5W-kVV"/>
+                                    <constraint firstAttribute="width" constant="110" id="gC4-hX-o2A"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="15"/>
+                                <state key="normal">
+                                    <string key="title">未実行
+タスク一覧</string>
+                                </state>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                        <real key="value" value="7"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
+                                        <color key="value" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
+                                        <real key="value" value="1"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                                <connections>
+                                    <segue destination="LwN-6D-9lf" kind="show" id="WTb-3b-eAs"/>
+                                </connections>
+                            </button>
+                            <view contentMode="scaleToFill" layoutMarginsFollowReadableWidth="YES" translatesAutoresizingMaskIntoConstraints="NO" id="iAG-Ja-vKr" customClass="GADBannerView">
+                                <rect key="frame" x="140" y="550" width="320" height="50"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="320" id="98r-a1-WNq"/>
+                                    <constraint firstAttribute="height" constant="50" id="rQr-CM-Q7O"/>
+                                </constraints>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <gestureRecognizers/>
                         <constraints>
-                            <constraint firstItem="WiE-Cl-dNZ" firstAttribute="trailing" secondItem="Sxb-O5-KuW" secondAttribute="trailing" id="84V-Nk-Voo"/>
-                            <constraint firstItem="Sxb-O5-KuW" firstAttribute="top" secondItem="WiE-Cl-dNZ" secondAttribute="bottom" constant="19" id="9cp-Tb-u50"/>
+                            <constraint firstItem="WiE-Cl-dNZ" firstAttribute="top" secondItem="srn-Hy-7qO" secondAttribute="top" id="5D6-sZ-EVZ"/>
+                            <constraint firstItem="WiE-Cl-dNZ" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="97" id="ByZ-V2-oko"/>
+                            <constraint firstItem="WiE-Cl-dNZ" firstAttribute="leading" secondItem="Sxb-O5-KuW" secondAttribute="leading" id="Cbp-Uf-8d4"/>
                             <constraint firstItem="DgO-E2-1lR" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="ECN-Y0-yv6"/>
+                            <constraint firstItem="srn-Hy-7qO" firstAttribute="leading" secondItem="WiE-Cl-dNZ" secondAttribute="trailing" constant="10" id="Ik0-Cy-K6O"/>
                             <constraint firstItem="Sxb-O5-KuW" firstAttribute="leading" secondItem="yGI-5p-a4n" secondAttribute="leading" id="MaA-dS-In9"/>
-                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="srn-Hy-7qO" secondAttribute="bottom" constant="38" id="Meg-Mf-W3h"/>
-                            <constraint firstItem="srn-Hy-7qO" firstAttribute="top" secondItem="DgO-E2-1lR" secondAttribute="bottom" constant="3" id="Tfl-FV-kHm"/>
+                            <constraint firstItem="Sxb-O5-KuW" firstAttribute="top" secondItem="WiE-Cl-dNZ" secondAttribute="bottom" constant="23" id="Qtg-0A-vh4"/>
+                            <constraint firstItem="srn-Hy-7qO" firstAttribute="trailing" secondItem="Sxb-O5-KuW" secondAttribute="trailing" id="ScF-6X-9Sd"/>
+                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="iAG-Ja-vKr" secondAttribute="bottom" id="U5G-Yi-Y87"/>
                             <constraint firstItem="yGI-5p-a4n" firstAttribute="centerX" secondItem="DgO-E2-1lR" secondAttribute="centerX" id="WEY-OY-TzY"/>
                             <constraint firstAttribute="trailing" secondItem="DgO-E2-1lR" secondAttribute="trailing" id="XhQ-hw-6PT"/>
                             <constraint firstItem="yGI-5p-a4n" firstAttribute="top" secondItem="Sxb-O5-KuW" secondAttribute="bottom" constant="20" id="aBg-Tc-r6g"/>
+                            <constraint firstItem="iAG-Ja-vKr" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="cKB-CV-bAN"/>
                             <constraint firstItem="DgO-E2-1lR" firstAttribute="top" secondItem="yGI-5p-a4n" secondAttribute="bottom" constant="3" id="daa-4K-x5n"/>
                             <constraint firstItem="Sxb-O5-KuW" firstAttribute="trailing" secondItem="yGI-5p-a4n" secondAttribute="trailing" id="rUF-jX-urj"/>
-                            <constraint firstItem="yGI-5p-a4n" firstAttribute="leading" secondItem="srn-Hy-7qO" secondAttribute="leading" id="rUL-QZ-ymI"/>
-                            <constraint firstItem="WiE-Cl-dNZ" firstAttribute="leading" secondItem="Sxb-O5-KuW" secondAttribute="leading" id="sFL-iJ-Zyh"/>
-                            <constraint firstItem="yGI-5p-a4n" firstAttribute="trailing" secondItem="srn-Hy-7qO" secondAttribute="trailing" id="wjH-0p-CIE"/>
+                            <constraint firstItem="WiE-Cl-dNZ" firstAttribute="bottom" secondItem="srn-Hy-7qO" secondAttribute="bottom" id="xeS-D6-ZFg"/>
                         </constraints>
                         <connections>
                             <outletCollection property="gestureRecognizers" destination="1uF-wf-XQx" appends="YES" id="RKG-am-hPd"/>
                         </connections>
                     </view>
                     <connections>
+                        <outlet property="bannerView" destination="iAG-Ja-vKr" id="M8O-i1-Izg"/>
                         <outlet property="inputForm" destination="Sxb-O5-KuW" id="8Dh-H5-JBn"/>
                     </connections>
                 </viewController>

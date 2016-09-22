@@ -7,6 +7,7 @@ target 'reminderSimple' do
 
   # Pods for reminderSimple
   pod 'RealmSwift'
+  pod 'Google-Mobile-Ads-SDK', '~> 7.0'
 
   target 'reminderSimpleTests' do
     inherit! :search_paths

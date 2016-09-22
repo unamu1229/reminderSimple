@@ -5,3 +5,4 @@
 Pods/*
 *.xcworkspace
 Podfile.lock
+config.swift

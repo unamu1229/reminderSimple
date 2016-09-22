@@ -6,6 +6,7 @@
 //  Copyright © 2016年 hiroshiyoneda. All rights reserved.
 //
 
+import GoogleMobileAds
 import UIKit
 import EventKit
 import RealmSwift
@@ -16,8 +17,9 @@ class ViewController: UIViewController {
      var myEventStore: EKEventStore! = EKEventStore()
      var myPlan: String!
     var myDate: NSDate! = NSDate()
+    @IBOutlet weak var bannerView: GADBannerView!
 
-    @IBOutlet weak var inputForm: UITextField!
+    @IBOutlet weak var inputForm: UITextField!    
     
     @IBAction func datePicker(sender: UIDatePicker) {
         didChangeDate(sender)
@@ -38,6 +40,12 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
         self.canDisplayBannerAds = true
+        
+        bannerView.adUnitID = BannerViewAdUnitID
+        bannerView.rootViewController = self
+        bannerView.loadRequest(GADRequest())
+        bannerView.adSize = kGADAdSizeBanner
+ 
         
         NSTimer.scheduledTimerWithTimeInterval(1, target: self, selector: #selector(ViewController.updateAlert), userInfo: nil, repeats: true)
 
