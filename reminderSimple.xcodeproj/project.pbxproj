@@ -18,6 +18,9 @@
 		F21E4F5F1D3B878000179FEE /* reminderSimpleTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F21E4F5E1D3B878000179FEE /* reminderSimpleTests.swift */; };
 		F21E4F6A1D3B878000179FEE /* reminderSimpleUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F21E4F691D3B878000179FEE /* reminderSimpleUITests.swift */; };
 		F21E4F781D3B90E300179FEE /* TableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F21E4F771D3B90E200179FEE /* TableViewController.swift */; };
+		F222F1E51D93B9AA0099E9EF /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = F222F1E41D93B9AA0099E9EF /* GoogleService-Info.plist */; };
+		F222F1E61D93B9AA0099E9EF /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = F222F1E41D93B9AA0099E9EF /* GoogleService-Info.plist */; };
+		F222F1E71D93B9AA0099E9EF /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = F222F1E41D93B9AA0099E9EF /* GoogleService-Info.plist */; };
 		F27AE7591D7DA6CE00B82E5F /* DoedTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F27AE7581D7DA6CE00B82E5F /* DoedTableViewController.swift */; };
 		F27B7F231D83A2E400316D44 /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F27B7F221D83A2E400316D44 /* DetailViewController.swift */; };
 		F29885191D86DF2300C89651 /* iAd.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F29885181D86DF2300C89651 /* iAd.framework */; };
@@ -66,6 +69,7 @@
 		F21E4F691D3B878000179FEE /* reminderSimpleUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = reminderSimpleUITests.swift; sourceTree = "<group>"; };
 		F21E4F6B1D3B878000179FEE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		F21E4F771D3B90E200179FEE /* TableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TableViewController.swift; sourceTree = "<group>"; };
+		F222F1E41D93B9AA0099E9EF /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../../../../Volumes/BuffaloHD/Downloads/GoogleService-Info.plist"; sourceTree = "<group>"; };
 		F27AE7581D7DA6CE00B82E5F /* DoedTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DoedTableViewController.swift; sourceTree = "<group>"; };
 		F27B7F221D83A2E400316D44 /* DetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DetailViewController.swift; path = ../DetailViewController.swift; sourceTree = "<group>"; };
 		F29885181D86DF2300C89651 /* iAd.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = iAd.framework; path = System/Library/Frameworks/iAd.framework; sourceTree = SDKROOT; };
@@ -131,6 +135,7 @@
 		F21E4F3A1D3B877F00179FEE = {
 			isa = PBXGroup;
 			children = (
+				F222F1E41D93B9AA0099E9EF /* GoogleService-Info.plist */,
 				F21E4F451D3B877F00179FEE /* reminderSimple */,
 				F21E4F5D1D3B878000179FEE /* reminderSimpleTests */,
 				F21E4F681D3B878000179FEE /* reminderSimpleUITests */,
@@ -301,6 +306,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				F21E4F541D3B877F00179FEE /* LaunchScreen.storyboard in Resources */,
+				F222F1E51D93B9AA0099E9EF /* GoogleService-Info.plist in Resources */,
 				F21E4F511D3B877F00179FEE /* Assets.xcassets in Resources */,
 				F21E4F4C1D3B877F00179FEE /* Main.storyboard in Resources */,
 			);
@@ -310,6 +316,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F222F1E61D93B9AA0099E9EF /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -317,6 +324,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F222F1E71D93B9AA0099E9EF /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

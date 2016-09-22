@@ -6,6 +6,7 @@
 //  Copyright © 2016年 hiroshiyoneda. All rights reserved.
 //
 
+import Firebase
 import UIKit
 import CoreData
 import EventKit
@@ -27,6 +28,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         // Override point for customization after application launch.
+        
+        // Use Firebase library to configure APIs
+        FIRApp.configure()
+        // Initialize Google Mobile Ads SDK
+        GADMobileAds.configure(withApplicationID: GADMobileAdsWithApplicationID)
+        
         
         //初期画面とタスク一覧画面にナビゲーションエリアを表示し、タスク一覧画面ではBackボタンを表示する
         let storyboard: UIStoryboard = UIStoryboard(name: "Main", bundle: NSBundle.mainBundle())
