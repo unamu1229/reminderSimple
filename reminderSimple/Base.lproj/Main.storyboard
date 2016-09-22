@@ -86,6 +86,7 @@
                             </datePicker>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <gestureRecognizers/>
                         <constraints>
                             <constraint firstItem="EpY-De-8ds" firstAttribute="top" secondItem="nDe-di-QqW" secondAttribute="bottom" constant="21" id="1f9-Ct-c8J"/>
                             <constraint firstItem="Ggm-M0-aoc" firstAttribute="leading" secondItem="maF-7j-eJ9" secondAttribute="leading" id="EbN-nc-5B5"/>
@@ -98,6 +99,9 @@
                             <constraint firstItem="nDe-di-QqW" firstAttribute="leading" secondItem="EpY-De-8ds" secondAttribute="leading" id="lAP-vG-2LX"/>
                             <constraint firstAttribute="trailing" secondItem="Ggm-M0-aoc" secondAttribute="trailing" id="sHh-yN-M1e"/>
                         </constraints>
+                        <connections>
+                            <outletCollection property="gestureRecognizers" destination="OrP-Cj-iq3" appends="YES" id="PXs-kI-g8i"/>
+                        </connections>
                     </view>
                     <toolbarItems/>
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
@@ -107,6 +111,11 @@
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="5e7-7f-Hda" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <tapGestureRecognizer id="OrP-Cj-iq3">
+                    <connections>
+                        <action selector="tapScreen:" destination="TPl-xX-0yD" id="fpO-JL-N4S"/>
+                    </connections>
+                </tapGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="1721" y="890"/>
         </scene>
@@ -150,19 +159,10 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <datePicker contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="dateAndTime" minuteInterval="1" translatesAutoresizingMaskIntoConstraints="NO" id="DgO-E2-1lR">
-                                <rect key="frame" x="0.0" y="298" width="600" height="216"/>
-                                <date key="date" timeIntervalSinceReferenceDate="490441819.76633799">
-                                    <!--2016-07-17 09:50:19 +0000-->
-                                </date>
-                                <connections>
-                                    <action selector="datePicker:" destination="BYZ-38-t0r" eventType="valueChanged" id="y8i-Q4-Evd"/>
-                                </connections>
-                            </datePicker>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="srn-Hy-7qO" customClass="CustomButton" customModule="reminderSimple" customModuleProvider="target">
-                                <rect key="frame" x="185" y="541" width="230" height="45"/>
+                                <rect key="frame" x="185" y="517" width="230" height="45"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="45" id="ixZ-zZ-3Ca"/>
+                                    <constraint firstAttribute="height" constant="45" id="tOd-w7-ZNX"/>
                                 </constraints>
                                 <state key="normal" title="実行済みタスク一覧">
                                     <color key="titleColor" white="0.5" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
@@ -182,17 +182,26 @@
                                     <segue destination="yy0-Uz-gCI" kind="show" id="ihD-vd-cnA"/>
                                 </connections>
                             </button>
+                            <datePicker contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="dateAndTime" minuteInterval="1" translatesAutoresizingMaskIntoConstraints="NO" id="DgO-E2-1lR">
+                                <rect key="frame" x="0.0" y="298" width="600" height="216"/>
+                                <date key="date" timeIntervalSinceReferenceDate="490441819.76633799">
+                                    <!--2016-07-17 09:50:19 +0000-->
+                                </date>
+                                <connections>
+                                    <action selector="datePicker:" destination="BYZ-38-t0r" eventType="valueChanged" id="y8i-Q4-Evd"/>
+                                </connections>
+                            </datePicker>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Sxb-O5-KuW">
-                                <rect key="frame" x="185" y="159" width="230" height="30"/>
+                                <rect key="frame" x="185" y="200" width="230" height="30"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WiE-Cl-dNZ" customClass="CustomButton" customModule="reminderSimple" customModuleProvider="target">
-                                <rect key="frame" x="185" y="74" width="230" height="45"/>
+                                <rect key="frame" x="185" y="136" width="230" height="45"/>
                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="230" id="1kd-UY-ugy"/>
-                                    <constraint firstAttribute="height" constant="45" id="WHl-es-AXW"/>
+                                    <constraint firstAttribute="height" constant="45" id="8kk-B0-VtN"/>
+                                    <constraint firstAttribute="width" constant="230" id="bbn-4h-fhy"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="15"/>
                                 <state key="normal" title="タスク一覧を表示する"/>
@@ -212,9 +221,9 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yGI-5p-a4n" customClass="CustomButton" customModule="reminderSimple" customModuleProvider="target">
-                                <rect key="frame" x="185" y="226" width="230" height="45"/>
+                                <rect key="frame" x="185" y="250" width="230" height="45"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="45" id="6Vg-zS-uWh"/>
+                                    <constraint firstAttribute="height" constant="45" id="8Bi-0d-w3s"/>
                                 </constraints>
                                 <state key="normal" title="タスクを登録する"/>
                                 <userDefinedRuntimeAttributes>
@@ -236,20 +245,20 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <gestureRecognizers/>
                         <constraints>
-                            <constraint firstAttribute="trailing" secondItem="DgO-E2-1lR" secondAttribute="trailing" id="3O2-Ag-9mu"/>
-                            <constraint firstItem="yGI-5p-a4n" firstAttribute="trailing" secondItem="srn-Hy-7qO" secondAttribute="trailing" id="5jf-sc-wFR"/>
-                            <constraint firstItem="WiE-Cl-dNZ" firstAttribute="trailing" secondItem="Sxb-O5-KuW" secondAttribute="trailing" id="7ni-cy-rNb"/>
-                            <constraint firstItem="yGI-5p-a4n" firstAttribute="top" secondItem="Sxb-O5-KuW" secondAttribute="bottom" constant="37" id="8Ki-Io-9eZ"/>
-                            <constraint firstItem="srn-Hy-7qO" firstAttribute="top" secondItem="DgO-E2-1lR" secondAttribute="bottom" constant="27" id="8S0-n5-r7f"/>
-                            <constraint firstItem="DgO-E2-1lR" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="Pnk-EZ-08v"/>
-                            <constraint firstItem="Sxb-O5-KuW" firstAttribute="leading" secondItem="yGI-5p-a4n" secondAttribute="leading" id="SoA-23-rID"/>
-                            <constraint firstItem="WiE-Cl-dNZ" firstAttribute="leading" secondItem="Sxb-O5-KuW" secondAttribute="leading" id="WuZ-AT-hep"/>
-                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="srn-Hy-7qO" secondAttribute="bottom" constant="14" id="Xfy-4T-6LK"/>
-                            <constraint firstItem="Sxb-O5-KuW" firstAttribute="top" secondItem="WiE-Cl-dNZ" secondAttribute="bottom" constant="40" id="dAM-Dt-4rL"/>
-                            <constraint firstItem="yGI-5p-a4n" firstAttribute="leading" secondItem="srn-Hy-7qO" secondAttribute="leading" id="eM0-6p-1h1"/>
-                            <constraint firstItem="yGI-5p-a4n" firstAttribute="centerX" secondItem="DgO-E2-1lR" secondAttribute="centerX" id="qcx-EU-YBa"/>
-                            <constraint firstItem="Sxb-O5-KuW" firstAttribute="trailing" secondItem="yGI-5p-a4n" secondAttribute="trailing" id="tpS-e1-jNO"/>
-                            <constraint firstItem="DgO-E2-1lR" firstAttribute="top" secondItem="yGI-5p-a4n" secondAttribute="bottom" constant="27" id="yFu-P0-tT6"/>
+                            <constraint firstItem="WiE-Cl-dNZ" firstAttribute="trailing" secondItem="Sxb-O5-KuW" secondAttribute="trailing" id="84V-Nk-Voo"/>
+                            <constraint firstItem="Sxb-O5-KuW" firstAttribute="top" secondItem="WiE-Cl-dNZ" secondAttribute="bottom" constant="19" id="9cp-Tb-u50"/>
+                            <constraint firstItem="DgO-E2-1lR" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="ECN-Y0-yv6"/>
+                            <constraint firstItem="Sxb-O5-KuW" firstAttribute="leading" secondItem="yGI-5p-a4n" secondAttribute="leading" id="MaA-dS-In9"/>
+                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="srn-Hy-7qO" secondAttribute="bottom" constant="38" id="Meg-Mf-W3h"/>
+                            <constraint firstItem="srn-Hy-7qO" firstAttribute="top" secondItem="DgO-E2-1lR" secondAttribute="bottom" constant="3" id="Tfl-FV-kHm"/>
+                            <constraint firstItem="yGI-5p-a4n" firstAttribute="centerX" secondItem="DgO-E2-1lR" secondAttribute="centerX" id="WEY-OY-TzY"/>
+                            <constraint firstAttribute="trailing" secondItem="DgO-E2-1lR" secondAttribute="trailing" id="XhQ-hw-6PT"/>
+                            <constraint firstItem="yGI-5p-a4n" firstAttribute="top" secondItem="Sxb-O5-KuW" secondAttribute="bottom" constant="20" id="aBg-Tc-r6g"/>
+                            <constraint firstItem="DgO-E2-1lR" firstAttribute="top" secondItem="yGI-5p-a4n" secondAttribute="bottom" constant="3" id="daa-4K-x5n"/>
+                            <constraint firstItem="Sxb-O5-KuW" firstAttribute="trailing" secondItem="yGI-5p-a4n" secondAttribute="trailing" id="rUF-jX-urj"/>
+                            <constraint firstItem="yGI-5p-a4n" firstAttribute="leading" secondItem="srn-Hy-7qO" secondAttribute="leading" id="rUL-QZ-ymI"/>
+                            <constraint firstItem="WiE-Cl-dNZ" firstAttribute="leading" secondItem="Sxb-O5-KuW" secondAttribute="leading" id="sFL-iJ-Zyh"/>
+                            <constraint firstItem="yGI-5p-a4n" firstAttribute="trailing" secondItem="srn-Hy-7qO" secondAttribute="trailing" id="wjH-0p-CIE"/>
                         </constraints>
                         <connections>
                             <outletCollection property="gestureRecognizers" destination="1uF-wf-XQx" appends="YES" id="RKG-am-hPd"/>

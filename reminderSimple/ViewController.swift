@@ -9,6 +9,7 @@
 import UIKit
 import EventKit
 import RealmSwift
+import iAd
 
 class ViewController: UIViewController {
     
@@ -36,6 +37,7 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
+        self.canDisplayBannerAds = true
         
         NSTimer.scheduledTimerWithTimeInterval(1, target: self, selector: #selector(ViewController.updateAlert), userInfo: nil, repeats: true)
 

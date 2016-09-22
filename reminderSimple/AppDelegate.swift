@@ -64,7 +64,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // If your application supports background execution, this method is called instead of applicationWillTerminate: when the user quits.
         
         let realm = try! Realm()
-        let reminderResults = realm.objects(ReminderModel.self)
+        let reminderResults = realm.objects(ReminderModel.self).filter("doflg == false")
 
         var arrNotification:[UILocalNotification] = []
         var badgeCount = 0

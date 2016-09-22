@@ -20,6 +20,7 @@
 		F21E4F781D3B90E300179FEE /* TableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F21E4F771D3B90E200179FEE /* TableViewController.swift */; };
 		F27AE7591D7DA6CE00B82E5F /* DoedTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F27AE7581D7DA6CE00B82E5F /* DoedTableViewController.swift */; };
 		F27B7F231D83A2E400316D44 /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F27B7F221D83A2E400316D44 /* DetailViewController.swift */; };
+		F29885191D86DF2300C89651 /* iAd.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F29885181D86DF2300C89651 /* iAd.framework */; };
 		F2AC41801D61983E005A02C4 /* Design.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2AC417F1D61983E005A02C4 /* Design.swift */; };
 		F2B824331D746503007E4C50 /* ReminderModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2B824321D746503007E4C50 /* ReminderModel.swift */; };
 		FE12B62D81165E8008728C3A /* Pods_reminderSimpleUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FA4D912B19D8E9CB8FBA66FB /* Pods_reminderSimpleUITests.framework */; };
@@ -67,6 +68,7 @@
 		F21E4F771D3B90E200179FEE /* TableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TableViewController.swift; sourceTree = "<group>"; };
 		F27AE7581D7DA6CE00B82E5F /* DoedTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DoedTableViewController.swift; sourceTree = "<group>"; };
 		F27B7F221D83A2E400316D44 /* DetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DetailViewController.swift; path = ../DetailViewController.swift; sourceTree = "<group>"; };
+		F29885181D86DF2300C89651 /* iAd.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = iAd.framework; path = System/Library/Frameworks/iAd.framework; sourceTree = SDKROOT; };
 		F2AC417F1D61983E005A02C4 /* Design.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Design.swift; sourceTree = "<group>"; };
 		F2B824321D746503007E4C50 /* ReminderModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReminderModel.swift; sourceTree = "<group>"; };
 		FA4D912B19D8E9CB8FBA66FB /* Pods_reminderSimpleUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_reminderSimpleUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -78,6 +80,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F29885191D86DF2300C89651 /* iAd.framework in Frameworks */,
 				36A0A3CF0D3CCE4452E01A62 /* Pods_reminderSimple.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -104,6 +107,7 @@
 		0AD9F08DB47267FDD24536DE /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				F29885181D86DF2300C89651 /* iAd.framework */,
 				7EFA20211A5D788848F208C3 /* Pods_reminderSimple.framework */,
 				418171C1D5F4836664B16036 /* Pods_reminderSimpleTests.framework */,
 				FA4D912B19D8E9CB8FBA66FB /* Pods_reminderSimpleUITests.framework */,
@@ -571,6 +575,7 @@
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer: hiroshi yoneda (MYAJKZCRP6)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
@@ -586,6 +591,7 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.1;
 				MTL_ENABLE_DEBUG_INFO = NO;
+				PROVISIONING_PROFILE = "555f2c60-6f93-4409-baa2-4469a790d342";
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;
 			};
