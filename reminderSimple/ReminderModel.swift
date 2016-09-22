@@ -11,11 +11,11 @@ import RealmSwift
 class ReminderModel:Object {
     dynamic var id = Int()
     dynamic var title = ""
-    dynamic var mydate:NSDate?
+    dynamic var mydate:Date?
     dynamic var alertflg = false
     dynamic var doflg = false
     
-    public func lastId() -> Int {
+    open func lastId() -> Int {
         let realm = try! Realm()
         if let remenberLast = realm.objects(ReminderModel).last {
             return remenberLast.id + 1

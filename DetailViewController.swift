@@ -16,7 +16,7 @@ class DetailViewController:UIViewController {
     let realm = try! Realm()
     @IBOutlet weak var datepicker: UIDatePicker!
     
-    @IBAction func tapScreen(sender: UITapGestureRecognizer) {
+    @IBAction func tapScreen(_ sender: UITapGestureRecognizer) {
          self.view.endEditing(true)
     }
     
@@ -31,7 +31,7 @@ class DetailViewController:UIViewController {
         }
     }
     
-    override func viewWillDisappear(animated: Bool) {
+    override func viewWillDisappear(_ animated: Bool) {
         let reminders = realm.objects(ReminderModel).filter("id == %@", id)
         for reminder in reminders {
             try! realm.write {
@@ -41,9 +41,9 @@ class DetailViewController:UIViewController {
         }
     }
     
-    @IBAction func backPage(sender: AnyObject) {
+    @IBAction func backPage(_ sender: AnyObject) {
         //self.navigationController?.popViewControllerAnimated(true)
-        self.dismissViewControllerAnimated(true, completion: nil)
+        self.dismiss(animated: true, completion: nil)
     }
     
 }

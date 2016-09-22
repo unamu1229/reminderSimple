@@ -6,14 +6,18 @@ target 'reminderSimple' do
   use_frameworks!  
 
   # Pods for reminderSimple
-  pod 'RealmSwift'
+  pod 'Realm', :git => 'https://github.com/realm/realm-cocoa.git', :branch => 'master', :submodules => true
+  pod 'RealmSwift', :git => 'https://github.com/realm/realm-cocoa.git', :branch => 'master', :submodules => true
   pod 'Firebase/Core'
   pod 'Firebase/AdMob'
 
   target 'reminderSimpleTests' do
     inherit! :search_paths
     # Pods for testing
-    pod 'RealmSwift'
+    pod 'Realm', :git => 'https://github.com/realm/realm-cocoa.git', :branch => 'master', :submodules => true
+    pod 'RealmSwift', :git => 'https://github.com/realm/realm-cocoa.git', :branch => 'master', :submodules => true
+    pod 'Firebase/Core'
+    pod 'Firebase/AdMob'
   end
 
   target 'reminderSimpleUITests' do

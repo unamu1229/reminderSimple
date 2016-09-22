@@ -18,49 +18,49 @@ class TableViewController: UITableViewController {
     let realm = try! Realm()
     
     // Buttonを拡張する.
-    override func tableView(tableView: UITableView, editActionsForRowAtIndexPath indexPath: NSIndexPath) -> [UITableViewRowAction]? {
+    override func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
         
         // 実行済みボタン.
-        let doedButton: UITableViewRowAction = UITableViewRowAction(style: .Normal, title: "実行済み") { (action, index) -> Void in
+        let doedButton: UITableViewRowAction = UITableViewRowAction(style: .normal, title: "実行済み") { (action, index) -> Void in
             
-            tableView.editing = false
+            tableView.isEditing = false
             print("doed")
             try! self.realm.write {
-                self.reminderResults![indexPath.row].doflg = true
+                self.reminderResults![(indexPath as NSIndexPath).row].doflg = true
             }
-            tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Fade)
+            tableView.deleteRows(at: [indexPath], with: .fade)
         }
-        doedButton.backgroundColor = UIColor.blueColor()
+        doedButton.backgroundColor = UIColor.blue
         
         // 編集ボタン.
-        let editButton: UITableViewRowAction = UITableViewRowAction(style: .Normal, title: "編集") { (action, index) -> Void in
+        let editButton: UITableViewRowAction = UITableViewRowAction(style: .normal, title: "編集") { (action, index) -> Void in
             
-            tableView.editing = false
+            tableView.isEditing = false
             print("archive")
             
             let storyboard: UIStoryboard = self.storyboard!
-            let detailViewController = storyboard.instantiateViewControllerWithIdentifier("detail") as! DetailViewController
-            detailViewController.id = self.reminderResults![indexPath.row].id
-            self.presentViewController(detailViewController, animated: true, completion: nil)
+            let detailViewController = storyboard.instantiateViewController(withIdentifier: "detail") as! DetailViewController
+            detailViewController.id = self.reminderResults![(indexPath as NSIndexPath).row].id
+            self.present(detailViewController, animated: true, completion: nil)
         }
-        editButton.backgroundColor = UIColor.grayColor()
+        editButton.backgroundColor = UIColor.gray
         
         // Deleteボタン.
-        let deleteButton: UITableViewRowAction = UITableViewRowAction(style: .Normal, title: "削除") { (action, index) -> Void in
+        let deleteButton: UITableViewRowAction = UITableViewRowAction(style: .normal, title: "削除") { (action, index) -> Void in
             
-            tableView.editing = false
+            tableView.isEditing = false
             print("delete")
             // Delete the row from the data source
             let realm = try! Realm()
             realm.beginWrite()
-            realm.delete(self.reminderResults![indexPath.row])
+            realm.delete(self.reminderResults![(indexPath as NSIndexPath).row])
             try! realm.commitWrite()
             
             //tabelのセルをアニメーションで消す
-            tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Fade)
+            tableView.deleteRows(at: [indexPath], with: .fade)
             
         }
-        deleteButton.backgroundColor = UIColor.redColor()
+        deleteButton.backgroundColor = UIColor.red
         
         return [doedButton, editButton, deleteButton]
         
@@ -78,7 +78,7 @@ class TableViewController: UITableViewController {
         
     }
     
-    override func viewWillAppear(animated: Bool) {
+    override func viewWillAppear(_ animated: Bool) {
         let realm = try! Realm()
         reminderResults = realm.objects(ReminderModel.self).filter("doflg == false")
         print(reminderResults)
@@ -96,12 +96,12 @@ class TableViewController: UITableViewController {
 
     // MARK: - Table view data source
 
-    override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+    override func numberOfSections(in tableView: UITableView) -> Int {
         // #warning Incomplete implementation, return the number of sections
         return 1
     }
 
-    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
         if let val = reminderResults {
              return val.count
@@ -110,23 +110,23 @@ class TableViewController: UITableViewController {
     }
 
     
-    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         //let cell = tableView.dequeueReusableCellWithIdentifier("reminderCell", forIndexPath: indexPath)
         
-        let cell = UITableViewCell(style: UITableViewCellStyle.Subtitle, reuseIdentifier: "reminderCell")
+        let cell = UITableViewCell(style: UITableViewCellStyle.subtitle, reuseIdentifier: "reminderCell")
         
-        if let dueDate = reminderResults![indexPath.row].mydate {
-            let now = NSDate()
-            if dueDate.compare(now) == NSComparisonResult.OrderedAscending {
-                cell.textLabel?.textColor = UIColor.redColor()
+        if let dueDate = reminderResults![(indexPath as NSIndexPath).row].mydate {
+            let now = Date()
+            if dueDate.compare(now) == ComparisonResult.orderedAscending {
+                cell.textLabel?.textColor = UIColor.red
             }
         }
         
-        cell.textLabel?.text = reminderResults![indexPath.row].title
+        cell.textLabel?.text = reminderResults![(indexPath as NSIndexPath).row].title
         
-        let formatter:NSDateFormatter = NSDateFormatter()
+        let formatter:DateFormatter = DateFormatter()
         formatter.dateFormat = "yyyy年MM月dd日HH時mm分"
-        cell.detailTextLabel?.text = formatter.stringFromDate(reminderResults![indexPath.row].mydate!)
+        cell.detailTextLabel?.text = formatter.string(from: reminderResults![(indexPath as NSIndexPath).row].mydate!)
         
         //cell.accessoryType = .Detail
         
@@ -144,17 +144,17 @@ class TableViewController: UITableViewController {
 
 
     // Override to support editing the table view.
-    override func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
-        if editingStyle == .Delete {
+    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
+        if editingStyle == .delete {
             // Delete the row from the data source
             let realm = try! Realm()
             realm.beginWrite()
-            realm.delete(reminderResults![indexPath.row])
+            realm.delete(reminderResults![(indexPath as NSIndexPath).row])
             try! realm.commitWrite()
             
             //tabelのセルをアニメーションで消す
-            tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Fade)
-        } else if editingStyle == .Insert {
+            tableView.deleteRows(at: [indexPath], with: .fade)
+        } else if editingStyle == .insert {
             // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
         }    
     }

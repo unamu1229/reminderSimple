@@ -16,21 +16,21 @@ class ViewController: UIViewController {
     
      var myEventStore: EKEventStore! = EKEventStore()
      var myPlan: String!
-    var myDate: NSDate! = NSDate()
+    var myDate: Date! = Date()
     @IBOutlet weak var bannerView: GADBannerView!
 
     @IBOutlet weak var inputForm: UITextField!    
     
-    @IBAction func datePicker(sender: UIDatePicker) {
+    @IBAction func datePicker(_ sender: UIDatePicker) {
         didChangeDate(sender)
        
     }
     
-    @IBAction func tapScreen(sender: UITapGestureRecognizer) {
+    @IBAction func tapScreen(_ sender: UITapGestureRecognizer) {
         self.view.endEditing(true)
     }
     
-    @IBAction func registar(sender: AnyObject) {
+    @IBAction func registar(_ sender: AnyObject) {
         myPlan = inputForm.text
         setMyPlanToReminder()
     }
@@ -43,11 +43,11 @@ class ViewController: UIViewController {
         
         bannerView.adUnitID = BannerViewAdUnitID
         bannerView.rootViewController = self
-        bannerView.loadRequest(GADRequest())
+        bannerView.load(GADRequest())
         bannerView.adSize = kGADAdSizeBanner
  
         
-        NSTimer.scheduledTimerWithTimeInterval(1, target: self, selector: #selector(ViewController.updateAlert), userInfo: nil, repeats: true)
+        Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(ViewController.updateAlert), userInfo: nil, repeats: true)
 
     }
 
@@ -59,14 +59,14 @@ class ViewController: UIViewController {
     /*
      DatePickerの値が変わった時に呼び出されるメソッド.
      */
-    func didChangeDate(sender: UIDatePicker) {
-        let myDateFormatter = NSDateFormatter()
-        myDateFormatter.timeStyle = .ShortStyle
-        myDateFormatter.dateStyle = .ShortStyle
-        let mySelectDateString = myDateFormatter.stringFromDate(sender.date)
-        let mySelectDate = myDateFormatter.dateFromString(mySelectDateString)!
+    func didChangeDate(_ sender: UIDatePicker) {
+        let myDateFormatter = DateFormatter()
+        myDateFormatter.timeStyle = .short
+        myDateFormatter.dateStyle = .short
+        let mySelectDateString = myDateFormatter.string(from: sender.date)
+        let mySelectDate = myDateFormatter.date(from: mySelectDateString)!
         
-        myDate = NSDate(timeInterval: 0, sinceDate: mySelectDate)
+        myDate = Date(timeInterval: 0, since: mySelectDate)
     }
     
     func updateAlert(){
@@ -75,10 +75,10 @@ class ViewController: UIViewController {
         for reminder in reminderResults {
             if reminder.alertflg == false {
                 if let dueDate = reminder.mydate {
-                    let now = NSDate()
+                    let now = Date()
                     //NSComparisonResult.OrderedSameで同じ時間を検知したかったができなかった
                     //のでフラグで管理することにした。
-                    if dueDate.compare(now) == NSComparisonResult.OrderedAscending {
+                    if dueDate.compare(now) == ComparisonResult.orderedAscending {
                         self.alert(reminder.title)
                         try! realm.write {
                             reminder.alertflg = true
@@ -89,11 +89,11 @@ class ViewController: UIViewController {
         }
     }
     
-    func alert(title:String){
-        let myAlert = UIAlertController(title: title, message: "やりなさい", preferredStyle: .Alert)
-        let myAction = UIAlertAction(title:"やります", style:  .Default, handler: nil)
+    func alert(_ title:String){
+        let myAlert = UIAlertController(title: title, message: "やりなさい", preferredStyle: .alert)
+        let myAction = UIAlertAction(title:"やります", style:  .default, handler: nil)
         myAlert.addAction(myAction)
-        presentViewController(myAlert, animated: true, completion: nil)
+        present(myAlert, animated: true, completion: nil)
     }
     
     func setMyPlanToReminder() {
@@ -101,7 +101,7 @@ class ViewController: UIViewController {
         let myAlert:UIAlertController!
         
         if(myPlan == ""){
-            myAlert = UIAlertController(title: "タスクを入力してください", message: "\(myPlan)", preferredStyle: UIAlertControllerStyle.Alert)
+            myAlert = UIAlertController(title: "タスクを入力してください", message: "\(myPlan)", preferredStyle: UIAlertControllerStyle.alert)
         } else {
             let reminderModel = ReminderModel()
             reminderModel.id = reminderModel.lastId()
@@ -114,15 +114,15 @@ class ViewController: UIViewController {
                 try realm.write {
                     realm.add(reminderModel)
                 }
-                myAlert = UIAlertController(title: "保存に成功しました", message: "\(myPlan)", preferredStyle: UIAlertControllerStyle.Alert)
+                myAlert = UIAlertController(title: "保存に成功しました", message: "\(myPlan)", preferredStyle: UIAlertControllerStyle.alert)
             } catch {
-                myAlert = UIAlertController(title: "保存に失敗しました", message: " \(myPlan)", preferredStyle: UIAlertControllerStyle.Alert)
+                myAlert = UIAlertController(title: "保存に失敗しました", message: " \(myPlan)", preferredStyle: UIAlertControllerStyle.alert)
             }
             
         }
-        let okAlertAction = UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler: nil)
+        let okAlertAction = UIAlertAction(title: "OK", style: UIAlertActionStyle.default, handler: nil)
         myAlert.addAction(okAlertAction)
-        self.presentViewController(myAlert, animated: true, completion: nil)
+        self.present(myAlert, animated: true, completion: nil)
     }
     
 }
