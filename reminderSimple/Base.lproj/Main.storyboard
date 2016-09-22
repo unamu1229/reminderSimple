@@ -180,7 +180,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="characterWrap" translatesAutoresizingMaskIntoConstraints="NO" id="srn-Hy-7qO" customClass="CustomButton" customModule="reminderSimple" customModuleProvider="target">
-                                <rect key="frame" x="305" y="117" width="110" height="60"/>
+                                <rect key="frame" x="305" y="50" width="110" height="60"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="110" id="JSh-ra-eQ7"/>
                                 </constraints>
@@ -205,7 +205,7 @@
                                 </connections>
                             </button>
                             <datePicker contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="dateAndTime" minuteInterval="1" translatesAutoresizingMaskIntoConstraints="NO" id="DgO-E2-1lR">
-                                <rect key="frame" x="0.0" y="298" width="600" height="216"/>
+                                <rect key="frame" x="0.0" y="231" width="600" height="216"/>
                                 <date key="date" timeIntervalSinceReferenceDate="490441819.76633799">
                                     <!--2016-07-17 09:50:19 +0000-->
                                 </date>
@@ -214,12 +214,12 @@
                                 </connections>
                             </datePicker>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Sxb-O5-KuW">
-                                <rect key="frame" x="185" y="200" width="230" height="30"/>
+                                <rect key="frame" x="185" y="133" width="230" height="30"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yGI-5p-a4n" customClass="CustomButton" customModule="reminderSimple" customModuleProvider="target">
-                                <rect key="frame" x="185" y="250" width="230" height="45"/>
+                                <rect key="frame" x="185" y="183" width="230" height="45"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="45" id="8Bi-0d-w3s"/>
                                 </constraints>
@@ -239,8 +239,16 @@
                                     <action selector="registar:" destination="BYZ-38-t0r" eventType="touchUpInside" id="R4T-lD-MWV"/>
                                 </connections>
                             </button>
+                            <view contentMode="scaleToFill" layoutMarginsFollowReadableWidth="YES" translatesAutoresizingMaskIntoConstraints="NO" id="iAG-Ja-vKr" customClass="GADBannerView">
+                                <rect key="frame" x="140" y="550" width="320" height="50"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="320" id="98r-a1-WNq"/>
+                                    <constraint firstAttribute="height" constant="50" id="rQr-CM-Q7O"/>
+                                </constraints>
+                            </view>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="characterWrap" translatesAutoresizingMaskIntoConstraints="NO" id="WiE-Cl-dNZ" customClass="CustomButton" customModule="reminderSimple" customModuleProvider="target">
-                                <rect key="frame" x="185" y="117" width="110" height="60"/>
+                                <rect key="frame" x="185" y="50" width="110" height="60"/>
                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="60" id="3OV-5W-kVV"/>
@@ -266,20 +274,11 @@
                                     <segue destination="LwN-6D-9lf" kind="show" id="WTb-3b-eAs"/>
                                 </connections>
                             </button>
-                            <view contentMode="scaleToFill" layoutMarginsFollowReadableWidth="YES" translatesAutoresizingMaskIntoConstraints="NO" id="iAG-Ja-vKr" customClass="GADBannerView">
-                                <rect key="frame" x="140" y="550" width="320" height="50"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="320" id="98r-a1-WNq"/>
-                                    <constraint firstAttribute="height" constant="50" id="rQr-CM-Q7O"/>
-                                </constraints>
-                            </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <gestureRecognizers/>
                         <constraints>
                             <constraint firstItem="WiE-Cl-dNZ" firstAttribute="top" secondItem="srn-Hy-7qO" secondAttribute="top" id="5D6-sZ-EVZ"/>
-                            <constraint firstItem="WiE-Cl-dNZ" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="97" id="ByZ-V2-oko"/>
                             <constraint firstItem="WiE-Cl-dNZ" firstAttribute="leading" secondItem="Sxb-O5-KuW" secondAttribute="leading" id="Cbp-Uf-8d4"/>
                             <constraint firstItem="DgO-E2-1lR" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="ECN-Y0-yv6"/>
                             <constraint firstItem="srn-Hy-7qO" firstAttribute="leading" secondItem="WiE-Cl-dNZ" secondAttribute="trailing" constant="10" id="Ik0-Cy-K6O"/>
@@ -292,6 +291,7 @@
                             <constraint firstItem="yGI-5p-a4n" firstAttribute="top" secondItem="Sxb-O5-KuW" secondAttribute="bottom" constant="20" id="aBg-Tc-r6g"/>
                             <constraint firstItem="iAG-Ja-vKr" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="cKB-CV-bAN"/>
                             <constraint firstItem="DgO-E2-1lR" firstAttribute="top" secondItem="yGI-5p-a4n" secondAttribute="bottom" constant="3" id="daa-4K-x5n"/>
+                            <constraint firstItem="WiE-Cl-dNZ" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="30" id="o38-NF-RxG"/>
                             <constraint firstItem="Sxb-O5-KuW" firstAttribute="trailing" secondItem="yGI-5p-a4n" secondAttribute="trailing" id="rUF-jX-urj"/>
                             <constraint firstItem="WiE-Cl-dNZ" firstAttribute="bottom" secondItem="srn-Hy-7qO" secondAttribute="bottom" id="xeS-D6-ZFg"/>
                         </constraints>
