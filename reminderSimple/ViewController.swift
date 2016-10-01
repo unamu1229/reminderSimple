@@ -32,6 +32,7 @@ class ViewController: UIViewController {
     
     @IBAction func registar(_ sender: AnyObject) {
         myPlan = inputForm.text
+        self.view.endEditing(true)
         setMyPlanToReminder()
     }
     
@@ -101,7 +102,7 @@ class ViewController: UIViewController {
         let myAlert:UIAlertController!
         
         if(myPlan == ""){
-            myAlert = UIAlertController(title: "タスクを入力してください", message: "\(myPlan)", preferredStyle: UIAlertControllerStyle.alert)
+            myAlert = UIAlertController(title: "タスクを入力してください", message: "", preferredStyle: UIAlertControllerStyle.alert)
         } else {
             let reminderModel = ReminderModel()
             reminderModel.id = reminderModel.lastId()
@@ -114,9 +115,10 @@ class ViewController: UIViewController {
                 try realm.write {
                     realm.add(reminderModel)
                 }
-                myAlert = UIAlertController(title: "保存に成功しました", message: "\(myPlan)", preferredStyle: UIAlertControllerStyle.alert)
+                myAlert = UIAlertController(title: "保存に成功しました", message: myPlan, preferredStyle: UIAlertControllerStyle.alert)
+                inputForm.text = ""
             } catch {
-                myAlert = UIAlertController(title: "保存に失敗しました", message: " \(myPlan)", preferredStyle: UIAlertControllerStyle.alert)
+                myAlert = UIAlertController(title: "保存に失敗しました", message: myPlan, preferredStyle: UIAlertControllerStyle.alert)
             }
             
         }
