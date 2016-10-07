@@ -30,11 +30,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
         
+        timer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(AppDelegate.updateAlert), userInfo: nil, repeats: true)
+        
         // Use Firebase library to configure APIs
         FIRApp.configure()
         // Initialize Google Mobile Ads SDK
         GADMobileAds.configure(withApplicationID: GADMobileAdsWithApplicationID)
-        
         
         //初期画面とタスク一覧画面にナビゲーションエリアを表示し、タスク一覧画面ではBackボタンを表示する
         let storyboard: UIStoryboard = UIStoryboard(name: "Main", bundle: Bundle.main)
@@ -73,8 +74,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         })
         
         Realm.Configuration.defaultConfiguration = config
-//		let realm = try! Realm()
-
+        
         return true
     }
     
@@ -165,7 +165,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let myAction = UIAlertAction(title:"やります", style:  .default, handler: nil)
         myAlert.addAction(myAction)
         if let vc = self.window?.rootViewController {
-            print("5555")
             vc.present(myAlert, animated: true, completion: nil)
         }
     }
