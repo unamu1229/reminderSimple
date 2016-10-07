@@ -16,7 +16,8 @@ class ViewController: UIViewController {
     
      var myEventStore: EKEventStore! = EKEventStore()
      var myPlan: String!
-    var myDate: Date! = Date()
+     var myDate: Date! = Date()
+
     @IBOutlet weak var bannerView: GADBannerView!
 
     @IBOutlet weak var inputForm: UITextField!    
@@ -46,10 +47,6 @@ class ViewController: UIViewController {
         bannerView.rootViewController = self
         bannerView.load(GADRequest())
         bannerView.adSize = kGADAdSizeBanner
- 
-        
-        Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(ViewController.updateAlert), userInfo: nil, repeats: true)
-
     }
 
     override func didReceiveMemoryWarning() {
@@ -68,33 +65,6 @@ class ViewController: UIViewController {
         let mySelectDate = myDateFormatter.date(from: mySelectDateString)!
         
         myDate = Date(timeInterval: 0, since: mySelectDate)
-    }
-    
-    func updateAlert(){
-        let realm = try! Realm()
-        let reminderResults = realm.objects(ReminderModel.self)        
-        for reminder in reminderResults {
-            if reminder.alertflg == false {
-                if let dueDate = reminder.mydate {
-                    let now = Date()
-                    //NSComparisonResult.OrderedSameで同じ時間を検知したかったができなかった
-                    //のでフラグで管理することにした。
-                    if dueDate.compare(now) == ComparisonResult.orderedAscending {
-                        self.alert(reminder.title)
-                        try! realm.write {
-                            reminder.alertflg = true
-                        }
-                    }
-                }
-            }
-        }
-    }
-    
-    func alert(_ title:String){
-        let myAlert = UIAlertController(title: title, message: "やりなさい", preferredStyle: .alert)
-        let myAction = UIAlertAction(title:"やります", style:  .default, handler: nil)
-        myAlert.addAction(myAction)
-        present(myAlert, animated: true, completion: nil)
     }
     
     func setMyPlanToReminder() {

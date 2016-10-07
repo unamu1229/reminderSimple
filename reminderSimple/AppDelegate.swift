@@ -17,6 +17,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
     var myNavigationController: UINavigationController!
+    var timer:Timer?
    // let myReminder = ReminderController()
     
     func dateComponentFromNSDate(_ date: Date)-> DateComponents{
@@ -43,9 +44,24 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         self.window?.rootViewController = myNavigationController
         self.window?.makeKeyAndVisible()
         
+        //通知アクションの設定
+        var complete = UIMutableUserNotificationAction()
+        complete.identifier = "complete"
+        complete.title = "実行済み"
+        complete.activationMode = UIUserNotificationActivationMode.background
+        
+        var Incomplete = UIMutableUserNotificationAction()
+        Incomplete.identifier = "Incomplete"
+        Incomplete.title = "未完了"
+        Incomplete.activationMode = UIUserNotificationActivationMode.background
+        
+        var category = UIMutableUserNotificationCategory()
+        category.identifier = "reminder"
+        category.setActions([complete, Incomplete], for: UIUserNotificationActionContext.default)
+        
         //プッシュ通知の設定の許可を求める
         application.registerUserNotificationSettings(
-            UIUserNotificationSettings(types: [.sound, .badge, .alert], categories: nil)
+            UIUserNotificationSettings(types: [.sound, .badge, .alert], categories: Set([category]))
         )
         
         let config = Realm.Configuration(
@@ -57,8 +73,27 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         })
         
         Realm.Configuration.defaultConfiguration = config
-		let realm = try! Realm()
+//		let realm = try! Realm()
+
         return true
+    }
+    
+    func application(_ application: UIApplication, handleActionWithIdentifier identifier: String?, forLocalNotification notification: UILocalNotification, completionHandler: () -> Void){
+        
+        if let id = notification.userInfo?["id"]{
+            let realm = try! Realm()
+            let reminders = realm.objects(ReminderModel).filter("id == %@", id)
+            for reminder in reminders {
+                try! realm.write {
+                    if(identifier! == "complete"){
+                        reminder.doflg = true
+                        reminder.alertflg = true
+                    } else if (identifier! == "Incomplete"){
+                    	reminder.alertflg = true
+                    }
+                }
+            }
+        }
     }
 
     func applicationWillResignActive(_ application: UIApplication) {
@@ -69,6 +104,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func applicationDidEnterBackground(_ application: UIApplication) {
         // Use this method to release shared resources, save user data, invalidate timers, and store enough application state information to restore your application to its current state in case it is terminated later.
         // If your application supports background execution, this method is called instead of applicationWillTerminate: when the user quits.
+        
+        timer?.invalidate()
         
         let realm = try! Realm()
         let reminderResults = realm.objects(ReminderModel.self).filter("doflg == false")
@@ -81,25 +118,56 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             notification.alertBody = reminder.title
             notification.fireDate = reminder.mydate
             notification.soundName = UILocalNotificationDefaultSoundName
-            
+            notification.category = "reminder"
+            notification.userInfo = ["id":reminder.id]
             let now = Date()
             //NSComparisonResult.OrderedSameで同じ時間を検知したかったができなかった
             //のでフラグで管理することにした。
             if reminder.mydate!.compare(now) == ComparisonResult.orderedAscending {
                 badgeCount += 1
             }
-            notification.userInfo = ["notifyId":"通知を識別できる文字など"]
             arrNotification.append(notification)
         }
         //バッチの数字を設定する
         application.applicationIconBadgeNumber = badgeCount
         //イベントの通知スケジュールを設定する
         application.scheduledLocalNotifications = arrNotification
-
     }
     
     func applicationWillEnterForeground(_ application: UIApplication) {
         // Called as part of the transition from the background to the inactive state; here you can undo many of the changes made on entering the background.
+        
+        timer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(AppDelegate.updateAlert), userInfo: nil, repeats: true)
+    }
+    
+    func updateAlert(){
+        let realm = try! Realm()
+        let reminderResults = realm.objects(ReminderModel.self)
+        for reminder in reminderResults {
+            if reminder.alertflg == false {
+                if let dueDate = reminder.mydate {
+                    let now = Date()
+                    //NSComparisonResult.OrderedSameで同じ時間を検知したかったができなかった
+                    //のでフラグで管理することにした。
+                    if dueDate.compare(now) == ComparisonResult.orderedAscending {
+                        self.alert(reminder.title)
+                        try! realm.write {
+                            reminder.alertflg = true
+                        }
+                    }
+                }
+            }
+        }
+    }
+    
+    func alert(_ title:String){
+        let myAlert = UIAlertController(title: title, message: "やりなさい", preferredStyle: .alert)
+        let myAction = UIAlertAction(title:"やります", style:  .default, handler: nil)
+        myAlert.addAction(myAction)
+        if let vc = self.window?.rootViewController {
+            print("5555")
+            vc.present(myAlert, animated: true, completion: nil)
+        }
     }
 
     func applicationDidBecomeActive(_ application: UIApplication) {
