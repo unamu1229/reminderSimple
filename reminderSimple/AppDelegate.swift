@@ -144,7 +144,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let realm = try! Realm()
         let reminderResults = realm.objects(ReminderModel.self)
         for reminder in reminderResults {
-            if reminder.alertflg == false {
+            if reminder.alertflg == false && reminder.doflg == false{
                 if let dueDate = reminder.mydate {
                     let now = Date()
                     //NSComparisonResult.OrderedSameで同じ時間を検知したかったができなかった
