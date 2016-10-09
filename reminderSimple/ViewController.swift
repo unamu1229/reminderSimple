@@ -20,7 +20,14 @@ class ViewController: UIViewController {
 
     @IBOutlet weak var bannerView: GADBannerView!
 
-    @IBOutlet weak var inputForm: UITextField!    
+//    @IBOutlet weak var inputForm: UITextField!
+    @IBOutlet weak var inputForm: UITextView!
+    
+    @IBOutlet weak var datePicker: UIDatePicker!
+    
+    @IBAction func setDatePickerNow(_ sender: UIButton) {
+        datePicker.date =  Date()
+    }
     
     @IBAction func datePicker(_ sender: UIDatePicker) {
         didChangeDate(sender)
