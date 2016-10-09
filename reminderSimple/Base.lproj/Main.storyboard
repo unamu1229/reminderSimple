@@ -46,6 +46,9 @@
                             <outlet property="delegate" destination="LwN-6D-9lf" id="ikY-1r-364"/>
                         </connections>
                     </tableView>
+                    <connections>
+                        <segue destination="TPl-xX-0yD" kind="show" identifier="toShowDetail" action="showDetailViewController:sender:" id="92Q-x4-CdE"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="qf6-mw-Wnr" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -68,7 +71,6 @@
                                 <constraints>
                                     <constraint firstAttribute="height" constant="160" id="wA0-gH-Rrr"/>
                                 </constraints>
-                                <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                 <userDefinedRuntimeAttributes>
@@ -135,7 +137,7 @@
                     </connections>
                 </tapGestureRecognizer>
             </objects>
-            <point key="canvasLocation" x="1726" y="879"/>
+            <point key="canvasLocation" x="1878" y="777"/>
         </scene>
         <!--Doed Table View Controller-->
         <scene sceneID="giw-BU-JQz">
