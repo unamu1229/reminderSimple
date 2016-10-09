@@ -17,7 +17,7 @@ class ReminderModel:Object {
     
     open func lastId() -> Int {
         let realm = try! Realm()
-        if let remenberLast = realm.objects(ReminderModel).last {
+        if let remenberLast = realm.objects(ReminderModel).sorted(byProperty: "id").last {
             return remenberLast.id + 1
         } else {
             return 1

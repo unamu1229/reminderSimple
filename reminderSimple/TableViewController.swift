@@ -80,7 +80,7 @@ class TableViewController: UITableViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         let realm = try! Realm()
-        reminderResults = realm.objects(ReminderModel.self).filter("doflg == false")
+        reminderResults = realm.objects(ReminderModel.self).filter("doflg == false").sorted(byProperty: "id", ascending: false)
         print(reminderResults)
         for reminder in reminderResults! {
             print(reminder.title)

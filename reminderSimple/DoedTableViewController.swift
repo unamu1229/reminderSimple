@@ -81,7 +81,7 @@ class DoedTableViewController: UITableViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         let realm = try! Realm()
-        reminderResults = realm.objects(ReminderModel.self).filter("doflg == true")
+        reminderResults = realm.objects(ReminderModel.self).filter("doflg == true").sorted(byProperty: "id", ascending: false)
         print(reminderResults)
         for reminder in reminderResults! {
             print(reminder.title)
