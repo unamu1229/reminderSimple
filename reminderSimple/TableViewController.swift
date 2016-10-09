@@ -32,19 +32,6 @@ class TableViewController: UITableViewController {
         }
         doedButton.backgroundColor = UIColor.blue
         
-        // 編集ボタン.
-        let editButton: UITableViewRowAction = UITableViewRowAction(style: .normal, title: "編集") { (action, index) -> Void in
-            
-            tableView.isEditing = false
-            print("archive")
-            
-            let storyboard: UIStoryboard = self.storyboard!
-            let detailViewController = storyboard.instantiateViewController(withIdentifier: "detail") as! DetailViewController
-            detailViewController.id = self.reminderResults![(indexPath as NSIndexPath).row].id
-            self.present(detailViewController, animated: true, completion: nil)
-        }
-        editButton.backgroundColor = UIColor.gray
-        
         // Deleteボタン.
         let deleteButton: UITableViewRowAction = UITableViewRowAction(style: .normal, title: "削除") { (action, index) -> Void in
             
@@ -62,7 +49,20 @@ class TableViewController: UITableViewController {
         }
         deleteButton.backgroundColor = UIColor.red
         
-        return [doedButton, editButton, deleteButton]
+        // 編集ボタン.
+        let editButton: UITableViewRowAction = UITableViewRowAction(style: .normal, title: "編集") { (action, index) -> Void in
+            
+            tableView.isEditing = false
+            print("archive")
+            
+            let storyboard: UIStoryboard = self.storyboard!
+            let detailViewController = storyboard.instantiateViewController(withIdentifier: "detail") as! DetailViewController
+            detailViewController.id = self.reminderResults![(indexPath as NSIndexPath).row].id
+            self.present(detailViewController, animated: true, completion: nil)
+        }
+        editButton.backgroundColor = UIColor.gray
+        
+        return [doedButton, deleteButton, editButton]
         
     }
 
@@ -95,6 +95,13 @@ class TableViewController: UITableViewController {
     }
 
     // MARK: - Table view data source
+    
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let storyboard: UIStoryboard = self.storyboard!
+        let detailViewController = storyboard.instantiateViewController(withIdentifier: "detail") as! DetailViewController
+        detailViewController.id = self.reminderResults![(indexPath as NSIndexPath).row].id
+        self.present(detailViewController, animated: true, completion: nil)
+    }
 
     override func numberOfSections(in tableView: UITableView) -> Int {
         // #warning Incomplete implementation, return the number of sections
