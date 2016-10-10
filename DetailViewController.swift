@@ -23,6 +23,8 @@ class DetailViewController:UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
+        
+        textData.sizeToFit()
         let reminders = realm.objects(ReminderModel).filter("id == %@", id)
         for reminder in reminders {
             textData.text = reminder.title
