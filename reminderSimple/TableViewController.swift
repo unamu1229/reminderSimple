@@ -52,13 +52,15 @@ class TableViewController: UITableViewController {
         // 編集ボタン.
         let editButton: UITableViewRowAction = UITableViewRowAction(style: .normal, title: "編集") { (action, index) -> Void in
             
-            tableView.isEditing = false
-            print("archive")
+//            tableView.isEditing = false
+//            print("archive")
+//            
+//            let storyboard: UIStoryboard = self.storyboard!
+//            let detailViewController = storyboard.instantiateViewController(withIdentifier: "detail") as! DetailViewController
+//            detailViewController.id = self.reminderResults![(indexPath as NSIndexPath).row].id
+//            self.present(detailViewController, animated: true, completion: nil)
             
-            let storyboard: UIStoryboard = self.storyboard!
-            let detailViewController = storyboard.instantiateViewController(withIdentifier: "detail") as! DetailViewController
-            detailViewController.id = self.reminderResults![(indexPath as NSIndexPath).row].id
-            self.present(detailViewController, animated: true, completion: nil)
+            self.performSegue(withIdentifier: "toShowDetail", sender:  self.reminderResults![(indexPath as NSIndexPath).row].id)
         }
         editButton.backgroundColor = UIColor.gray
         

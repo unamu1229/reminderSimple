@@ -52,13 +52,15 @@ class DoedTableViewController: UITableViewController {
         // 編集ボタン.
         let editButton: UITableViewRowAction = UITableViewRowAction(style: .normal, title: "編集") { (action, index) -> Void in
             
-            tableView.isEditing = false
-            print("archive")
+//            tableView.isEditing = false
+//            print("archive")
+//            
+//            let storyboard: UIStoryboard = self.storyboard!
+//            let detailViewController = storyboard.instantiateViewController(withIdentifier: "detail") as! DetailViewController
+//            detailViewController.id = self.reminderResults![(indexPath as NSIndexPath).row].id
+//            self.present(detailViewController, animated: true, completion: nil)
             
-            let storyboard: UIStoryboard = self.storyboard!
-            let detailViewController = storyboard.instantiateViewController(withIdentifier: "detail") as! DetailViewController
-            detailViewController.id = self.reminderResults![(indexPath as NSIndexPath).row].id
-            self.present(detailViewController, animated: true, completion: nil)
+            self.performSegue(withIdentifier: "toShowDetail", sender:  self.reminderResults![(indexPath as NSIndexPath).row].id)
             
         }
         editButton.backgroundColor = UIColor.gray
@@ -98,10 +100,17 @@ class DoedTableViewController: UITableViewController {
     // MARK: - Table view data source
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let storyboard: UIStoryboard = self.storyboard!
-        let detailViewController = storyboard.instantiateViewController(withIdentifier: "detail") as! DetailViewController
-        detailViewController.id = self.reminderResults![(indexPath as NSIndexPath).row].id
-        self.present(detailViewController, animated: true, completion: nil)
+//        let storyboard: UIStoryboard = self.storyboard!
+//        let detailViewController = storyboard.instantiateViewController(withIdentifier: "detail") as! DetailViewController
+//        detailViewController.id = self.reminderResults![(indexPath as NSIndexPath).row].id
+//        self.present(detailViewController, animated: true, completion: nil)
+        
+        self.performSegue(withIdentifier: "toShowDetail", sender:  self.reminderResults![(indexPath as NSIndexPath).row].id)
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        let detail = segue.destination as! DetailViewController
+        detail.id = sender as! Int
     }
     
     override func numberOfSections(in tableView: UITableView) -> Int {
