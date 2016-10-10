@@ -43,7 +43,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         self.window = UIWindow(frame: UIScreen.main.bounds)
         self.myNavigationController = UINavigationController(rootViewController: viewController)
         self.window?.rootViewController = myNavigationController
-        self.window?.makeKeyAndVisible()
         
         //通知アクションの設定
         var complete = UIMutableUserNotificationAction()
