@@ -38,11 +38,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         GADMobileAds.configure(withApplicationID: GADMobileAdsWithApplicationID)
         
         //初期画面とタスク一覧画面にナビゲーションエリアを表示し、タスク一覧画面ではBackボタンを表示する
-        let storyboard: UIStoryboard = UIStoryboard(name: "Main", bundle: Bundle.main)
-        let viewController: UIViewController = (storyboard.instantiateInitialViewController() as UIViewController?)!
-        self.window = UIWindow(frame: UIScreen.main.bounds)
-        self.myNavigationController = UINavigationController(rootViewController: viewController)
-        self.window?.rootViewController = myNavigationController
+//        let storyboard: UIStoryboard = UIStoryboard(name: "Main", bundle: Bundle.main)
+//        let viewController: UIViewController = (storyboard.instantiateInitialViewController() as UIViewController?)!
+//        self.window = UIWindow(frame: UIScreen.main.bounds)
+//        self.myNavigationController = UINavigationController(rootViewController: viewController)
+//        self.window?.rootViewController = myNavigationController
         
         //通知アクションの設定
         var complete = UIMutableUserNotificationAction()
