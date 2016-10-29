@@ -12,6 +12,8 @@ import RealmSwift
 
 class TableViewController: UITableViewController {
     
+    var category_id = Int()
+    var usepage = ""
     var eventStore: EKEventStore! = EKEventStore()
     var reminders: [EKReminder]! = [EKReminder]()
     var reminderResults:Results<ReminderModel>?
@@ -82,7 +84,12 @@ class TableViewController: UITableViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         let realm = try! Realm()
-        reminderResults = realm.objects(ReminderModel.self).filter("doflg == false").sorted(byProperty: "id", ascending: false)
+        if usepage == "categoryTask" {
+            reminderResults = realm.objects(ReminderModel.self).filter("doflg == false").filter("category_id == \(category_id)").sorted(byProperty: "id", ascending: false)
+        } else {
+            reminderResults = realm.objects(ReminderModel.self).filter("doflg == false").sorted(byProperty: "id", ascending: false)
+        }
+       
         print(reminderResults)
         for reminder in reminderResults! {
             print(reminder.title)

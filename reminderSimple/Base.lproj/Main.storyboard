@@ -109,6 +109,9 @@
                             </connections>
                         </barButtonItem>
                     </navigationItem>
+                    <connections>
+                        <segue destination="qfK-wL-oqD" kind="show" identifier="toCategoryTask" id="Wyt-1T-GDv"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="HeC-du-2WL" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -169,6 +172,38 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Jau-vh-EHu" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2593" y="-26"/>
+        </scene>
+        <!--カテゴリ別タスク-->
+        <scene sceneID="n0O-sU-VqH">
+            <objects>
+                <tableViewController id="qfK-wL-oqD" customClass="TableViewController" customModule="reminderSimple" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="5qS-DP-jnG">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <prototypes>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="Hko-Mf-Ym5">
+                                <rect key="frame" x="0.0" y="92" width="375" height="44"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Hko-Mf-Ym5" id="JPY-1y-QX7">
+                                    <frame key="frameInset" width="375" height="43"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                </tableViewCellContentView>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="qfK-wL-oqD" id="Oeg-Sz-H2A"/>
+                            <outlet property="delegate" destination="qfK-wL-oqD" id="12m-c9-Ihc"/>
+                        </connections>
+                    </tableView>
+                    <navigationItem key="navigationItem" title="カテゴリ別タスク" id="muH-gh-np9"/>
+                    <connections>
+                        <segue destination="TPl-xX-0yD" kind="show" identifier="toShowDetail" id="c5J-Zh-TOK"/>
+                    </connections>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="H77-hy-MFQ" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2780" y="742"/>
         </scene>
         <!--詳細タスク-->
         <scene sceneID="WZH-2z-8Gz">
@@ -285,7 +320,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="7AC-Cy-mC5" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="543" y="1263"/>
+            <point key="canvasLocation" x="305" y="1256"/>
         </scene>
         <!--View Controller-->
         <scene sceneID="tne-QT-ifu">
@@ -474,7 +509,7 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="92Q-x4-CdE"/>
         <segue reference="OLo-Th-Kbs"/>
+        <segue reference="X9r-4b-AeP"/>
     </inferredMetricsTieBreakers>
 </document>

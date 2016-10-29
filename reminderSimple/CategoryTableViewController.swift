@@ -66,6 +66,16 @@ class CategoryTableViewController: UITableViewController {
         return cell
     }
     
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        self.performSegue(withIdentifier: "toCategoryTask", sender:  CategoryResults![(indexPath as NSIndexPath).row].id)
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        let categoryTask = segue.destination as! TableViewController
+        categoryTask.category_id = sender as! Int
+        categoryTask.usepage = "categoryTask"
+    }
+    
 
     /*
     // Override to support conditional editing of the table view.
@@ -101,6 +111,7 @@ class CategoryTableViewController: UITableViewController {
         return true
     }
     */
+    
 
     /*
     // MARK: - Navigation
