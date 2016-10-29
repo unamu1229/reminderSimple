@@ -25,8 +25,10 @@ class CategoryTableViewController: UITableViewController {
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        let realm = try! Realm()
-        CategoryResults = realm.objects(CategoryModel.self).sorted(byProperty: "id", ascending: false)
+//        let realm = try! Realm()
+//        CategoryResults = realm.objects(CategoryModel.self).sorted(byProperty: "id", ascending: false)
+        let category = Category()
+        CategoryResults = category.CategoryResults
         print(CategoryResults)
         for category in CategoryResults! {
             print(category.title)

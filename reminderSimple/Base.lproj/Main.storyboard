@@ -66,7 +66,7 @@
                     <navigationItem key="navigationItem" title="未実行タスク" id="Fr1-2f-XV1">
                         <barButtonItem key="rightBarButtonItem" title="カテゴリ" id="IW2-m1-q0e">
                             <connections>
-                                <segue destination="rRE-Ul-3jQ" kind="show" id="OLo-Th-Kbs"/>
+                                <segue destination="rRE-Ul-3jQ" kind="show" identifier="category" id="OLo-Th-Kbs"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -184,7 +184,7 @@
                         <subviews>
                             <datePicker contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="dateAndTime" minuteInterval="1" translatesAutoresizingMaskIntoConstraints="NO" id="EpY-De-8ds">
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="600" id="e88-p3-z8r"/>
+                                    <constraint firstAttribute="height" constant="172" id="Hct-gQ-fW0"/>
                                 </constraints>
                                 <date key="date" timeIntervalSinceReferenceDate="495211634.036107">
                                     <!--2016-09-10 14:47:14 +0000-->
@@ -192,6 +192,9 @@
                             </datePicker>
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="nDe-di-QqW" customClass="CustomTextView" customModule="reminderSimple" customModuleProvider="target">
                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="116" id="g26-S0-TeR"/>
+                                </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                 <userDefinedRuntimeAttributes>
@@ -206,16 +209,25 @@
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                             </textView>
+                            <pickerView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="KJu-XA-w97">
+                                <connections>
+                                    <outlet property="delegate" destination="TPl-xX-0yD" id="kaC-au-yCs"/>
+                                </connections>
+                            </pickerView>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <gestureRecognizers/>
                         <constraints>
-                            <constraint firstItem="3Zn-l1-iiZ" firstAttribute="top" secondItem="EpY-De-8ds" secondAttribute="bottom" constant="123" id="4Wj-j3-GEb"/>
-                            <constraint firstItem="EpY-De-8ds" firstAttribute="top" secondItem="nDe-di-QqW" secondAttribute="bottom" constant="40" id="6Lr-ae-FPm"/>
-                            <constraint firstItem="nDe-di-QqW" firstAttribute="centerX" secondItem="EpY-De-8ds" secondAttribute="centerX" id="8DO-Cj-eQw"/>
-                            <constraint firstItem="nDe-di-QqW" firstAttribute="leading" secondItem="maF-7j-eJ9" secondAttribute="leadingMargin" constant="10" id="V5h-Q5-SU1"/>
-                            <constraint firstItem="EpY-De-8ds" firstAttribute="centerX" secondItem="maF-7j-eJ9" secondAttribute="centerX" id="t6P-2R-K9E"/>
-                            <constraint firstItem="nDe-di-QqW" firstAttribute="top" secondItem="cA0-hm-148" secondAttribute="bottom" constant="64" id="tde-qD-rvm"/>
+                            <constraint firstItem="EpY-De-8ds" firstAttribute="trailing" secondItem="KJu-XA-w97" secondAttribute="trailing" id="4et-ff-3g9"/>
+                            <constraint firstItem="nDe-di-QqW" firstAttribute="centerX" secondItem="EpY-De-8ds" secondAttribute="centerX" id="5ER-6d-bg1"/>
+                            <constraint firstItem="nDe-di-QqW" firstAttribute="leading" secondItem="maF-7j-eJ9" secondAttribute="leadingMargin" constant="10" id="Egh-jd-sML"/>
+                            <constraint firstItem="KJu-XA-w97" firstAttribute="top" secondItem="EpY-De-8ds" secondAttribute="bottom" constant="17" id="FFt-8H-ZJW"/>
+                            <constraint firstItem="nDe-di-QqW" firstAttribute="top" secondItem="cA0-hm-148" secondAttribute="bottom" constant="18" id="IUg-6w-9a4"/>
+                            <constraint firstItem="EpY-De-8ds" firstAttribute="top" secondItem="nDe-di-QqW" secondAttribute="bottom" constant="25" id="RHl-93-PSj"/>
+                            <constraint firstItem="EpY-De-8ds" firstAttribute="leading" secondItem="maF-7j-eJ9" secondAttribute="leading" id="Xd3-MY-Avr"/>
+                            <constraint firstItem="EpY-De-8ds" firstAttribute="leading" secondItem="KJu-XA-w97" secondAttribute="leading" id="Z2x-u2-ik7"/>
+                            <constraint firstItem="3Zn-l1-iiZ" firstAttribute="top" secondItem="KJu-XA-w97" secondAttribute="bottom" constant="31" id="hi5-vt-WZy"/>
+                            <constraint firstAttribute="trailing" secondItem="EpY-De-8ds" secondAttribute="trailing" id="uuL-hg-B4B"/>
                         </constraints>
                         <connections>
                             <outletCollection property="gestureRecognizers" destination="OrP-Cj-iq3" appends="YES" id="PXs-kI-g8i"/>
@@ -227,6 +239,7 @@
                     </navigationItem>
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
+                        <outlet property="cetegoryPicker" destination="KJu-XA-w97" id="hR7-tV-Vzx"/>
                         <outlet property="datepicker" destination="EpY-De-8ds" id="w4I-Jo-WKi"/>
                         <outlet property="textData" destination="nDe-di-QqW" id="9gR-wR-19d"/>
                     </connections>
@@ -238,7 +251,7 @@
                     </connections>
                 </tapGestureRecognizer>
             </objects>
-            <point key="canvasLocation" x="1879" y="1236"/>
+            <point key="canvasLocation" x="1877.5999999999999" y="1235.5322338830586"/>
         </scene>
         <!--実行済みタスク-->
         <scene sceneID="giw-BU-JQz">

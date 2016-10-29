@@ -109,8 +109,10 @@ class TableViewController: UITableViewController {
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        let detail = segue.destination as! DetailViewController
-        detail.id = sender as! Int
+        if segue.identifier == "toShowDetail" {
+            let detail = segue.destination as! DetailViewController
+            detail.id = sender as! Int
+        }       
     }
 
 

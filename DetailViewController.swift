@@ -9,12 +9,18 @@
 import UIKit
 import RealmSwift
 
-class DetailViewController:UIViewController {
+class DetailViewController:UIViewController,UIPickerViewDelegate,UIPickerViewDataSource {
     
     var id = Int()
     @IBOutlet weak var textData: UITextView!
     let realm = try! Realm()
     @IBOutlet weak var datepicker: UIDatePicker!
+    @IBOutlet weak var cetegoryPicker: UIPickerView!
+    
+    var categoryId = Int()
+    var selectRow = [Int: Int]()
+    
+    let category = Category()
     
     @IBAction func tapScreen(_ sender: UITapGestureRecognizer) {
          self.view.endEditing(true)
@@ -23,13 +29,17 @@ class DetailViewController:UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
-        
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
         textData.sizeToFit()
         let reminders = realm.objects(ReminderModel).filter("id == %@", id)
         for reminder in reminders {
             textData.text = reminder.title
             datepicker.date = reminder.mydate!
-         //   textData = reminder.title
+            let row = selectRow[reminder.category_id]
+            cetegoryPicker.selectRow(row!, inComponent: 0, animated: true)
+            categoryId = reminder.category_id
         }
     }
     
@@ -39,13 +49,30 @@ class DetailViewController:UIViewController {
             try! realm.write {
              	reminder.title = textData.text
                 reminder.mydate = datepicker.date
+                reminder.category_id = categoryId
             }
         }
     }
     
-    @IBAction func backPage(_ sender: AnyObject) {
-        //self.navigationController?.popViewControllerAnimated(true)
-        self.dismiss(animated: true, completion: nil)
+    func numberOfComponents(in picekrView: UIPickerView) -> Int {
+        return 1
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+        let category = Category()
+        if var count = category.CategoryResults?.count{
+            return count
+        }
+        return 0
+    }
+    
+    func pickerView(_ pickerView:UIPickerView, titleForRow row:Int, forComponent component: Int) -> String? {
+        selectRow[(category.CategoryResults?[row].id)!] = row
+        return category.CategoryResults?[row].title
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+        categoryId = (category.CategoryResults?[row].id)!
     }
     
 }
