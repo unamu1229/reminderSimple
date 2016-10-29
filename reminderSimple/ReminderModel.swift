@@ -14,6 +14,7 @@ class ReminderModel:Object {
     dynamic var mydate:Date?
     dynamic var alertflg = false
     dynamic var doflg = false
+    dynamic var category_id = Int()
     
     open func lastId() -> Int {
         let realm = try! Realm()

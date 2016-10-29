@@ -82,17 +82,17 @@
         <!--カテゴリ-->
         <scene sceneID="EVn-df-HCd">
             <objects>
-                <tableViewController id="rRE-Ul-3jQ" sceneMemberID="viewController">
+                <tableViewController id="rRE-Ul-3jQ" customClass="CategoryTableViewController" customModule="reminderSimple" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="LhO-82-pXq">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="EUt-gV-kpp">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" restorationIdentifier="categoryCell" selectionStyle="default" indentationWidth="10" reuseIdentifier="categoryCell" id="EUt-gV-kpp">
                                 <rect key="frame" x="0.0" y="92" width="375" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="EUt-gV-kpp" id="JGN-Mk-9ZP">
-                                    <frame key="frameInset" width="375" height="43"/>
+                                    <frame key="frameInset" width="375" height="44"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                 </tableViewCellContentView>
                             </tableViewCell>
@@ -114,10 +114,10 @@
             </objects>
             <point key="canvasLocation" x="1783" y="-25"/>
         </scene>
-        <!--View Controller-->
+        <!--Category Controller-->
         <scene sceneID="JT1-jF-eD8">
             <objects>
-                <viewController id="iTG-JA-Heb" sceneMemberID="viewController">
+                <viewController id="iTG-JA-Heb" customClass="CategoryController" customModule="reminderSimple" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="UiK-Jm-yz8"/>
                         <viewControllerLayoutGuide type="bottom" id="B94-Ds-1WN"/>
@@ -147,6 +147,9 @@
                                         <real key="value" value="7"/>
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
+                                <connections>
+                                    <action selector="addCategory" destination="iTG-JA-Heb" eventType="touchUpInside" id="qcB-dS-fbL"/>
+                                </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -155,11 +158,13 @@
                             <constraint firstItem="nB8-pM-H69" firstAttribute="centerX" secondItem="LoK-Ba-fpY" secondAttribute="centerX" id="4QZ-W6-d1t"/>
                             <constraint firstItem="nB8-pM-H69" firstAttribute="leading" secondItem="yTu-fe-H0A" secondAttribute="leading" id="54M-E8-AmE"/>
                             <constraint firstItem="nB8-pM-H69" firstAttribute="leading" secondItem="LoK-Ba-fpY" secondAttribute="leadingMargin" constant="56" id="JQ1-BH-SQl"/>
-                            <constraint firstItem="B94-Ds-1WN" firstAttribute="top" secondItem="yTu-fe-H0A" secondAttribute="bottom" constant="388" id="Lrn-4M-x9M"/>
+                            <constraint firstItem="B94-Ds-1WN" firstAttribute="top" secondItem="yTu-fe-H0A" secondAttribute="bottom" constant="288" id="Lrn-4M-x9M"/>
                             <constraint firstItem="nB8-pM-H69" firstAttribute="top" secondItem="UiK-Jm-yz8" secondAttribute="bottom" constant="123" id="X3G-C7-EjA"/>
-                            <constraint firstItem="yTu-fe-H0A" firstAttribute="top" secondItem="nB8-pM-H69" secondAttribute="bottom" constant="17" id="sEb-IZ-d3v"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="input" destination="nB8-pM-H69" id="jqj-Yu-oBw"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Jau-vh-EHu" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -457,6 +462,6 @@
     </scenes>
     <inferredMetricsTieBreakers>
         <segue reference="92Q-x4-CdE"/>
-        <segue reference="orP-03-55f"/>
+        <segue reference="OLo-Th-Kbs"/>
     </inferredMetricsTieBreakers>
 </document>
