@@ -12,7 +12,6 @@ import RealmSwift
 class DetailViewController:UIViewController,UIPickerViewDelegate,UIPickerViewDataSource {
     
     var id = Int()
-    var fromPage = ""
     let realm = try! Realm()
     var categoryId = Int()
     var MPRC = MapPickerRowCategory()
@@ -68,11 +67,6 @@ class DetailViewController:UIViewController,UIPickerViewDelegate,UIPickerViewDat
     
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
         categoryId = MPRC.getCategoryId(row: row)
-    }
-    
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-            let category = segue.destination as! CategoryTableViewController
-	        category.fromPage = fromPage
     }
     
 }

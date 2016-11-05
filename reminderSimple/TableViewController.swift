@@ -13,7 +13,7 @@ import RealmSwift
 class TableViewController: UITableViewController {
     
     var category_id = Int()
-    var fromPage = ""
+    let appDelegate:AppDelegate = UIApplication.shared.delegate as! AppDelegate
     var eventStore: EKEventStore! = EKEventStore()
     var reminders: [EKReminder]! = [EKReminder]()
     var reminderResults:Results<ReminderModel>?
@@ -35,7 +35,7 @@ class TableViewController: UITableViewController {
         }
         completeOrTaskButton.backgroundColor = UIColor.blue
         
-        if fromPage ==  "showComplete" || fromPage ==  "showCompleteCategory" {
+        if appDelegate.fromPage ==  "showComplete" || appDelegate.fromPage ==  "showCompleteCategory" {
             
             // 未実行に戻すボタン.
             completeOrTaskButton = UITableViewRowAction(style: .normal, title: "未実行に戻す") { (action, index) -> Void in
@@ -91,18 +91,20 @@ class TableViewController: UITableViewController {
         super.viewDidLoad()
         self.tableView.dataSource = self
         self.tableView.delegate = self
-        if fromPage == "showTask" {
+        if appDelegate.fromPage == "showTask" {
             pagename.title = "未実行タスク一覧"
-        } else if fromPage ==  "showComplete" {
+            reminderResults = realm.objects(ReminderModel.self).filter("doflg == false").sorted(byProperty: "id", ascending: false)
+        } else if appDelegate.fromPage ==  "showComplete" {
             pagename.title = "完了済みタスク一覧"
-        } else if fromPage ==  "showTaskCategory" {
+            reminderResults = realm.objects(ReminderModel.self).filter("doflg == true").sorted(byProperty: "id", ascending: false)
+        } else if appDelegate.fromPage ==  "showTaskCategory" {
             pagename.title = "カテゴリ別未実行タスク一覧"
-        } else if fromPage ==  "showCompleteCategory" {
+            reminderResults = realm.objects(ReminderModel.self).filter("doflg == false").filter("category_id == \(category_id)").sorted(byProperty: "id", ascending: false)
+        } else if appDelegate.fromPage ==  "showCompleteCategory" {
             pagename.title = "カテゴリ別完了済みタスク一覧"
+            reminderResults = realm.objects(ReminderModel.self).filter("doflg == true").filter("category_id == \(category_id)").sorted(byProperty: "id", ascending: false)
         }
         
-        
-
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
 
@@ -111,30 +113,7 @@ class TableViewController: UITableViewController {
         
     }
     
-    override func viewWillAppear(_ animated: Bool) {
-        let realm = try! Realm()
-        if fromPage == "showTask" {
-            reminderResults = realm.objects(ReminderModel.self).filter("doflg == false").sorted(byProperty: "id", ascending: false)
-        } else if fromPage ==  "showComplete" {
-            reminderResults = realm.objects(ReminderModel.self).filter("doflg == true").sorted(byProperty: "id", ascending: false)
-        } else if fromPage ==  "showTaskCategory" {
-            reminderResults = realm.objects(ReminderModel.self).filter("doflg == false").filter("category_id == \(category_id)").sorted(byProperty: "id", ascending: false)
-        } else if fromPage ==  "showCompleteCategory" {
-            reminderResults = realm.objects(ReminderModel.self).filter("doflg == true").filter("category_id == \(category_id)").sorted(byProperty: "id", ascending: false)
-        }
-        
-//        if usepage == "categoryTask" {
-//            if fromPage == "showComplete" {
-//                reminderResults = realm.objects(ReminderModel.self).filter("doflg == true").filter("category_id == \(category_id)").sorted(byProperty: "id", ascending: false)
-//            } else {
-//                 reminderResults = realm.objects(ReminderModel.self).filter("doflg == false").filter("category_id == \(category_id)").sorted(byProperty: "id", ascending: false)
-//            }
-//        } else if usepage == "showComplete" {
-//            reminderResults = realm.objects(ReminderModel.self).filter("doflg == true").sorted(byProperty: "id", ascending: false)
-//        }else {
-//            reminderResults = realm.objects(ReminderModel.self).filter("doflg == false").sorted(byProperty: "id", ascending: false)
-//        }
-       
+    override func viewWillAppear(_ animated: Bool) {        
         self.tableView.reloadData()
     }
 
@@ -159,10 +138,6 @@ class TableViewController: UITableViewController {
         if segue.identifier == "toShowDetail" {
             let detail = segue.destination as! DetailViewController
             detail.id = sender as! Int
-            detail.fromPage =  fromPage
-        } else if segue.identifier == "toShowCategory" {
-            let category = segue.destination as! CategoryTableViewController
-            category.fromPage =  fromPage
         }
     }
 

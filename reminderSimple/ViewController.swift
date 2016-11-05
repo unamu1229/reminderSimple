@@ -70,18 +70,12 @@ class ViewController: UIViewController {
 //    }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "showTask" || segue.identifier == "showComplete" {
-            let tvc = segue.destination as! TableViewController
-            let appDelegate:AppDelegate = UIApplication.shared.delegate as! AppDelegate
-            if segue.identifier == "showTask" {
-                appDelegate.fromPage = "showTask"
-                tvc.fromPage = "showTask"
-            } else if segue.identifier == "showComplete" {
-                appDelegate.fromPage = "showComplete"
-                tvc.fromPage = "showComplete"
-            }
-            var message = appDelegate.fromPage
-        }                
+        let appDelegate:AppDelegate = UIApplication.shared.delegate as! AppDelegate
+        if segue.identifier == "showTask" {
+            appDelegate.fromPage = "showTask"
+        } else if segue.identifier == "showComplete" {
+            appDelegate.fromPage = "showComplete"
+        }
     }
     
     /*
