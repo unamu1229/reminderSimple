@@ -13,17 +13,18 @@ import RealmSwift
 class TableViewController: UITableViewController {
     
     var category_id = Int()
-    var usepage = ""
+    var fromPage = ""
     var eventStore: EKEventStore! = EKEventStore()
     var reminders: [EKReminder]! = [EKReminder]()
     var reminderResults:Results<ReminderModel>?
     let realm = try! Realm()
+    @IBOutlet weak var pagename: UINavigationItem!
     
     // Buttonを拡張する.
     override func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
         
         // 実行済みボタン.
-        let doedButton: UITableViewRowAction = UITableViewRowAction(style: .normal, title: "実行済み") { (action, index) -> Void in
+        var completeOrTaskButton: UITableViewRowAction = UITableViewRowAction(style: .normal, title: "実行済み") { (action, index) -> Void in
             
             tableView.isEditing = false
             print("doed")
@@ -32,7 +33,23 @@ class TableViewController: UITableViewController {
             }
             tableView.deleteRows(at: [indexPath], with: .fade)
         }
-        doedButton.backgroundColor = UIColor.blue
+        completeOrTaskButton.backgroundColor = UIColor.blue
+        
+        if fromPage ==  "showComplete" || fromPage ==  "showCompleteCategory" {
+            
+            // 未実行に戻すボタン.
+            completeOrTaskButton = UITableViewRowAction(style: .normal, title: "未実行に戻す") { (action, index) -> Void in
+                
+                tableView.isEditing = false
+                print("doed")
+                try! self.realm.write {
+                    self.reminderResults![(indexPath as NSIndexPath).row].doflg = false
+                }
+                tableView.deleteRows(at: [indexPath], with: .fade)
+            }
+            completeOrTaskButton.backgroundColor = UIColor.blue
+            
+        }
         
         // Deleteボタン.
         let deleteButton: UITableViewRowAction = UITableViewRowAction(style: .normal, title: "削除") { (action, index) -> Void in
@@ -66,7 +83,7 @@ class TableViewController: UITableViewController {
         }
         editButton.backgroundColor = UIColor.gray
         
-        return [doedButton, deleteButton, editButton]
+        return [completeOrTaskButton, deleteButton, editButton]
         
     }
 
@@ -74,6 +91,18 @@ class TableViewController: UITableViewController {
         super.viewDidLoad()
         self.tableView.dataSource = self
         self.tableView.delegate = self
+        if fromPage == "showTask" {
+            pagename.title = "未実行タスク一覧"
+        } else if fromPage ==  "showComplete" {
+            pagename.title = "完了済みタスク一覧"
+        } else if fromPage ==  "showTaskCategory" {
+            pagename.title = "カテゴリ別未実行タスク一覧"
+        } else if fromPage ==  "showCompleteCategory" {
+            pagename.title = "カテゴリ別完了済みタスク一覧"
+        }
+        
+        
+
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
 
@@ -84,17 +113,28 @@ class TableViewController: UITableViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         let realm = try! Realm()
-        if usepage == "categoryTask" {
-            reminderResults = realm.objects(ReminderModel.self).filter("doflg == false").filter("category_id == \(category_id)").sorted(byProperty: "id", ascending: false)
-        } else {
+        if fromPage == "showTask" {
             reminderResults = realm.objects(ReminderModel.self).filter("doflg == false").sorted(byProperty: "id", ascending: false)
+        } else if fromPage ==  "showComplete" {
+            reminderResults = realm.objects(ReminderModel.self).filter("doflg == true").sorted(byProperty: "id", ascending: false)
+        } else if fromPage ==  "showTaskCategory" {
+            reminderResults = realm.objects(ReminderModel.self).filter("doflg == false").filter("category_id == \(category_id)").sorted(byProperty: "id", ascending: false)
+        } else if fromPage ==  "showCompleteCategory" {
+            reminderResults = realm.objects(ReminderModel.self).filter("doflg == true").filter("category_id == \(category_id)").sorted(byProperty: "id", ascending: false)
         }
+        
+//        if usepage == "categoryTask" {
+//            if fromPage == "showComplete" {
+//                reminderResults = realm.objects(ReminderModel.self).filter("doflg == true").filter("category_id == \(category_id)").sorted(byProperty: "id", ascending: false)
+//            } else {
+//                 reminderResults = realm.objects(ReminderModel.self).filter("doflg == false").filter("category_id == \(category_id)").sorted(byProperty: "id", ascending: false)
+//            }
+//        } else if usepage == "showComplete" {
+//            reminderResults = realm.objects(ReminderModel.self).filter("doflg == true").sorted(byProperty: "id", ascending: false)
+//        }else {
+//            reminderResults = realm.objects(ReminderModel.self).filter("doflg == false").sorted(byProperty: "id", ascending: false)
+//        }
        
-        print(reminderResults)
-        for reminder in reminderResults! {
-            print(reminder.title)
-            print(reminder.mydate)
-        }
         self.tableView.reloadData()
     }
 
@@ -119,7 +159,11 @@ class TableViewController: UITableViewController {
         if segue.identifier == "toShowDetail" {
             let detail = segue.destination as! DetailViewController
             detail.id = sender as! Int
-        }       
+            detail.fromPage =  fromPage
+        } else if segue.identifier == "toShowCategory" {
+            let category = segue.destination as! CategoryTableViewController
+            category.fromPage =  fromPage
+        }
     }
 
 

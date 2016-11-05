@@ -12,6 +12,7 @@ import RealmSwift
 class CategoryTableViewController: UITableViewController {
     
     var CategoryResults:Results<CategoryModel>?
+    var fromPage = ""
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -71,9 +72,20 @@ class CategoryTableViewController: UITableViewController {
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        let categoryTask = segue.destination as! TableViewController
-        categoryTask.category_id = sender as! Int
-        categoryTask.usepage = "categoryTask"
+        if segue.identifier == "toCategoryTask"{
+            let categoryTask = segue.destination as! TableViewController
+            categoryTask.category_id = sender as! Int
+            if fromPage.range(of: "Category") == nil {
+                fromPage += "Category"
+            }
+            categoryTask.fromPage = fromPage
+            
+            let appDelegate:AppDelegate = UIApplication.shared.delegate as! AppDelegate
+            var message = appDelegate.fromPage
+            print(message)
+        } else if segue.identifier == "showAddCategory" {
+            
+        }
     }
     
 

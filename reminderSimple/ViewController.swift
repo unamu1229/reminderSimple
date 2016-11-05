@@ -18,6 +18,7 @@ class ViewController: UIViewController {
      var myPlan: String!
      var myDate: Date! = Date()
 
+
     @IBOutlet weak var bannerView: GADBannerView!
 
 //    @IBOutlet weak var inputForm: UITextField!
@@ -54,11 +55,33 @@ class ViewController: UIViewController {
         bannerView.rootViewController = self
         bannerView.load(GADRequest())
         bannerView.adSize = kGADAdSizeBanner
+        
+        let appDelegate:AppDelegate = UIApplication.shared.delegate as! AppDelegate
+        var message = appDelegate.fromPage
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+    
+//    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+//        self.performSegue(withIdentifier: "toCategoryTask", sender:  CategoryResults![(indexPath as NSIndexPath).row].id)
+//    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "showTask" || segue.identifier == "showComplete" {
+            let tvc = segue.destination as! TableViewController
+            let appDelegate:AppDelegate = UIApplication.shared.delegate as! AppDelegate
+            if segue.identifier == "showTask" {
+                appDelegate.fromPage = "showTask"
+                tvc.fromPage = "showTask"
+            } else if segue.identifier == "showComplete" {
+                appDelegate.fromPage = "showComplete"
+                tvc.fromPage = "showComplete"
+            }
+            var message = appDelegate.fromPage
+        }                
     }
     
     /*

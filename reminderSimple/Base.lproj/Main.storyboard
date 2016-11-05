@@ -11,7 +11,7 @@
         <scene sceneID="yRo-0u-sKS">
             <objects>
                 <navigationController id="ADM-ge-kmd" sceneMemberID="viewController">
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="oX9-lW-TGv">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="oX9-lW-TGv">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -33,7 +33,7 @@
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <prototypes>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="reminderCell" textLabel="i9G-KD-vHs" detailTextLabel="cBI-Lx-zBe" style="IBUITableViewCellStyleValue1" id="UaH-OV-TEF">
-                                <rect key="frame" x="0.0" y="92" width="375" height="44"/>
+                                <rect key="frame" x="0.0" y="28" width="375" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="UaH-OV-TEF" id="2Zp-O8-FLH">
                                     <frame key="frameInset" width="375" height="44"/>
@@ -66,18 +66,19 @@
                     <navigationItem key="navigationItem" title="未実行タスク" id="Fr1-2f-XV1">
                         <barButtonItem key="rightBarButtonItem" title="カテゴリ" id="IW2-m1-q0e">
                             <connections>
-                                <segue destination="rRE-Ul-3jQ" kind="show" identifier="category" id="OLo-Th-Kbs"/>
+                                <segue destination="rRE-Ul-3jQ" kind="show" identifier="toShowCategory" id="OLo-Th-Kbs"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
+                        <outlet property="pagename" destination="Fr1-2f-XV1" id="tmK-Lk-as6"/>
                         <segue destination="TPl-xX-0yD" kind="show" identifier="toShowDetail" id="92Q-x4-CdE"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="qf6-mw-Wnr" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1150" y="677"/>
+            <point key="canvasLocation" x="1289" y="429"/>
         </scene>
         <!--カテゴリ-->
         <scene sceneID="EVn-df-HCd">
@@ -105,17 +106,17 @@
                     <navigationItem key="navigationItem" title="カテゴリ" id="H3j-Rt-NQs">
                         <barButtonItem key="rightBarButtonItem" title="追加" id="FNA-tl-AYE">
                             <connections>
-                                <segue destination="iTG-JA-Heb" kind="show" id="RWP-sL-xY9"/>
+                                <segue destination="iTG-JA-Heb" kind="show" identifier="showAddCategory" id="RWP-sL-xY9"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
                     <connections>
-                        <segue destination="qfK-wL-oqD" kind="show" identifier="toCategoryTask" id="Wyt-1T-GDv"/>
+                        <segue destination="LwN-6D-9lf" kind="show" identifier="toCategoryTask" id="aKz-ZA-vSf"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="HeC-du-2WL" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1783" y="-25"/>
+            <point key="canvasLocation" x="1692" y="-400"/>
         </scene>
         <!--Category Controller-->
         <scene sceneID="JT1-jF-eD8">
@@ -171,39 +172,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Jau-vh-EHu" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2593" y="-26"/>
-        </scene>
-        <!--カテゴリ別タスク-->
-        <scene sceneID="n0O-sU-VqH">
-            <objects>
-                <tableViewController id="qfK-wL-oqD" customClass="TableViewController" customModule="reminderSimple" customModuleProvider="target" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="5qS-DP-jnG">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="Hko-Mf-Ym5">
-                                <rect key="frame" x="0.0" y="92" width="375" height="44"/>
-                                <autoresizingMask key="autoresizingMask"/>
-                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Hko-Mf-Ym5" id="JPY-1y-QX7">
-                                    <frame key="frameInset" width="375" height="43"/>
-                                    <autoresizingMask key="autoresizingMask"/>
-                                </tableViewCellContentView>
-                            </tableViewCell>
-                        </prototypes>
-                        <connections>
-                            <outlet property="dataSource" destination="qfK-wL-oqD" id="Oeg-Sz-H2A"/>
-                            <outlet property="delegate" destination="qfK-wL-oqD" id="12m-c9-Ihc"/>
-                        </connections>
-                    </tableView>
-                    <navigationItem key="navigationItem" title="カテゴリ別タスク" id="muH-gh-np9"/>
-                    <connections>
-                        <segue destination="TPl-xX-0yD" kind="show" identifier="toShowDetail" id="c5J-Zh-TOK"/>
-                    </connections>
-                </tableViewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="H77-hy-MFQ" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="2780" y="742"/>
+            <point key="canvasLocation" x="2673" y="-401"/>
         </scene>
         <!--詳細タスク-->
         <scene sceneID="WZH-2z-8Gz">
@@ -270,7 +239,11 @@
                     </view>
                     <toolbarItems/>
                     <navigationItem key="navigationItem" title="詳細タスク" id="NAx-hZ-pXk">
-                        <barButtonItem key="rightBarButtonItem" title="カテゴリ" id="xib-D9-wcu"/>
+                        <barButtonItem key="rightBarButtonItem" title="カテゴリ" id="xib-D9-wcu">
+                            <connections>
+                                <segue destination="rRE-Ul-3jQ" kind="show" id="8za-T5-myl"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
@@ -286,41 +259,7 @@
                     </connections>
                 </tapGestureRecognizer>
             </objects>
-            <point key="canvasLocation" x="1877.5999999999999" y="1235.5322338830586"/>
-        </scene>
-        <!--実行済みタスク-->
-        <scene sceneID="giw-BU-JQz">
-            <objects>
-                <tableViewController id="yy0-Uz-gCI" customClass="DoedTableViewController" customModule="reminderSimple" customModuleProvider="target" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="Phw-hK-kK3">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                        <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="reminderCell" id="oFf-3f-EJ6">
-                                <rect key="frame" x="0.0" y="92" width="375" height="44"/>
-                                <autoresizingMask key="autoresizingMask"/>
-                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="oFf-3f-EJ6" id="jIu-Fj-739">
-                                    <frame key="frameInset" width="375" height="44"/>
-                                    <autoresizingMask key="autoresizingMask"/>
-                                </tableViewCellContentView>
-                            </tableViewCell>
-                        </prototypes>
-                        <connections>
-                            <outlet property="dataSource" destination="yy0-Uz-gCI" id="C32-Ma-27e"/>
-                            <outlet property="delegate" destination="yy0-Uz-gCI" id="9Uq-7E-Nnq"/>
-                        </connections>
-                    </tableView>
-                    <navigationItem key="navigationItem" title="実行済みタスク" id="oaV-te-j8S">
-                        <barButtonItem key="rightBarButtonItem" title="カテゴリ" id="rwi-J9-8mT"/>
-                    </navigationItem>
-                    <connections>
-                        <segue destination="TPl-xX-0yD" kind="show" identifier="toShowDetail" id="X9r-4b-AeP"/>
-                    </connections>
-                </tableViewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="7AC-Cy-mC5" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="305" y="1256"/>
+            <point key="canvasLocation" x="2292" y="429"/>
         </scene>
         <!--View Controller-->
         <scene sceneID="tne-QT-ifu">
@@ -380,7 +319,7 @@
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                                 <connections>
-                                    <segue destination="LwN-6D-9lf" kind="show" id="WTb-3b-eAs"/>
+                                    <segue destination="LwN-6D-9lf" kind="show" identifier="showTask" id="WTb-3b-eAs"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Pv6-bo-ltr" customClass="CustomButton" customModule="reminderSimple" customModuleProvider="target">
@@ -427,7 +366,7 @@
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                                 <connections>
-                                    <segue destination="yy0-Uz-gCI" kind="show" id="ihD-vd-cnA"/>
+                                    <segue destination="LwN-6D-9lf" kind="show" identifier="showComplete" id="w0q-UO-cPw"/>
                                 </connections>
                             </button>
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="N1d-Tg-BbW" customClass="CustomTextView" customModule="reminderSimple" customModuleProvider="target">
@@ -509,7 +448,7 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
+        <segue reference="aKz-ZA-vSf"/>
         <segue reference="OLo-Th-Kbs"/>
-        <segue reference="X9r-4b-AeP"/>
     </inferredMetricsTieBreakers>
 </document>

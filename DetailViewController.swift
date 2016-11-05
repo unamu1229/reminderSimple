@@ -12,6 +12,8 @@ import RealmSwift
 class DetailViewController:UIViewController,UIPickerViewDelegate,UIPickerViewDataSource {
     
     var id = Int()
+    var fromPage = ""
+    var lastRow = Int()
     @IBOutlet weak var textData: UITextView!
     let realm = try! Realm()
     @IBOutlet weak var datepicker: UIDatePicker!
@@ -19,6 +21,7 @@ class DetailViewController:UIViewController,UIPickerViewDelegate,UIPickerViewDat
     
     var categoryId = Int()
     var selectRow = [Int: Int]()
+    var MPRC = MapPickerRowCategory()
     
     let category = Category()
     
@@ -37,8 +40,11 @@ class DetailViewController:UIViewController,UIPickerViewDelegate,UIPickerViewDat
         for reminder in reminders {
             textData.text = reminder.title
             datepicker.date = reminder.mydate!
-            let row = selectRow[reminder.category_id]
-            cetegoryPicker.selectRow(row!, inComponent: 0, animated: true)
+            let row = MPRC.getPickerRow(categoryId: reminder.category_id)
+            cetegoryPicker.selectRow(row, inComponent: 0, animated: true)
+//            if let row = selectRow[reminder.category_id] {
+//                cetegoryPicker.selectRow(row, inComponent: 0, animated: true)
+//            }
             categoryId = reminder.category_id
         }
     }
@@ -61,18 +67,31 @@ class DetailViewController:UIViewController,UIPickerViewDelegate,UIPickerViewDat
     func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
         let category = Category()
         if var count = category.CategoryResults?.count{
+            lastRow = count
+            count += 1
             return count
         }
         return 0
     }
     
-    func pickerView(_ pickerView:UIPickerView, titleForRow row:Int, forComponent component: Int) -> String? {
-        selectRow[(category.CategoryResults?[row].id)!] = row
-        return category.CategoryResults?[row].title
+    func pickerView(_ pickerView:UIPickerView, titleForRow row:Int, forComponent component: Int) -> String? {        
+//        if lastRow == row {
+//            return "未分類"
+//        } else {
+            MPRC.addMapPickerRowCategory(row: row)
+            //selectRow[(category.CategoryResults?[row].id)!] = row
+        	//return category.CategoryResults?[row].title
+            return MPRC.getCategoryTitle(row: row)
+//        }
     }
     
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-        categoryId = (category.CategoryResults?[row].id)!
+        categoryId = MPRC.getCategoryId(row: row)
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+            let category = segue.destination as! CategoryTableViewController
+	        category.fromPage = fromPage
     }
     
 }

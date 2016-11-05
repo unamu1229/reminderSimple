@@ -18,6 +18,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var window: UIWindow?
     var myNavigationController: UINavigationController!
     var timer:Timer?
+    var fromPage = ""
    // let myReminder = ReminderController()
     
     func dateComponentFromNSDate(_ date: Date)-> DateComponents{
