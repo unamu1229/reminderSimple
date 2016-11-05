@@ -13,18 +13,13 @@ class DetailViewController:UIViewController,UIPickerViewDelegate,UIPickerViewDat
     
     var id = Int()
     var fromPage = ""
-    var lastRow = Int()
-    @IBOutlet weak var textData: UITextView!
     let realm = try! Realm()
-    @IBOutlet weak var datepicker: UIDatePicker!
-    @IBOutlet weak var cetegoryPicker: UIPickerView!
-    
     var categoryId = Int()
-    var selectRow = [Int: Int]()
     var MPRC = MapPickerRowCategory()
     
-    let category = Category()
-    
+    @IBOutlet weak var textData: UITextView!
+    @IBOutlet weak var datepicker: UIDatePicker!
+    @IBOutlet weak var cetegoryPicker: UIPickerView!
     @IBAction func tapScreen(_ sender: UITapGestureRecognizer) {
          self.view.endEditing(true)
     }
@@ -42,9 +37,6 @@ class DetailViewController:UIViewController,UIPickerViewDelegate,UIPickerViewDat
             datepicker.date = reminder.mydate!
             let row = MPRC.getPickerRow(categoryId: reminder.category_id)
             cetegoryPicker.selectRow(row, inComponent: 0, animated: true)
-//            if let row = selectRow[reminder.category_id] {
-//                cetegoryPicker.selectRow(row, inComponent: 0, animated: true)
-//            }
             categoryId = reminder.category_id
         }
     }
@@ -65,24 +57,13 @@ class DetailViewController:UIViewController,UIPickerViewDelegate,UIPickerViewDat
     }
     
     func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
-        let category = Category()
-        if var count = category.CategoryResults?.count{
-            lastRow = count
-            count += 1
-            return count
-        }
-        return 0
+        let count = MPRC.getPickerRowCount()
+        return count
     }
     
-    func pickerView(_ pickerView:UIPickerView, titleForRow row:Int, forComponent component: Int) -> String? {        
-//        if lastRow == row {
-//            return "未分類"
-//        } else {
+    func pickerView(_ pickerView:UIPickerView, titleForRow row:Int, forComponent component: Int) -> String? {
             MPRC.addMapPickerRowCategory(row: row)
-            //selectRow[(category.CategoryResults?[row].id)!] = row
-        	//return category.CategoryResults?[row].title
             return MPRC.getCategoryTitle(row: row)
-//        }
     }
     
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {

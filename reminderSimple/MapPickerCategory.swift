@@ -9,10 +9,10 @@ import RealmSwift
 
 struct MapPickerRowCategory {
     var arrMapPickerRowCategory = [0 : CategoryIdTitle(id:0, title:"未設定")]
+    let category = Category()
     
     mutating func addMapPickerRowCategory(row: Int){
         let deletedRow = row - 1
-        let category = Category()
         if deletedRow != -1 {
             if let result = category.CategoryResults?[deletedRow] {
                 self.arrMapPickerRowCategory[row] = CategoryIdTitle(id:result.id, title:result.title)
@@ -40,6 +40,14 @@ struct MapPickerRowCategory {
             }
         }
         return 0
+    }
+    
+    func getPickerRowCount() -> Int {
+        if var count = category.CategoryResults?.count{
+            count += 1
+            return count
+        }
+        return 1
     }
 }
 
