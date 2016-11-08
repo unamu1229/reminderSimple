@@ -97,12 +97,14 @@ class TableViewController: UITableViewController {
         } else if appDelegate.fromPage ==  "showComplete" {
             pagename.title = "完了済みタスク一覧"
             reminderResults = realm.objects(ReminderModel.self).filter("doflg == true").sorted(byProperty: "id", ascending: false)
+            pagename.rightBarButtonItem?.tintColor = UIColor.gray
         } else if appDelegate.fromPage ==  "showTaskCategory" {
             pagename.title = "カテゴリ別未実行タスク一覧"
             reminderResults = realm.objects(ReminderModel.self).filter("doflg == false").filter("category_id == \(category_id)").sorted(byProperty: "id", ascending: false)
         } else if appDelegate.fromPage ==  "showCompleteCategory" {
             pagename.title = "カテゴリ別完了済みタスク一覧"
             reminderResults = realm.objects(ReminderModel.self).filter("doflg == true").filter("category_id == \(category_id)").sorted(byProperty: "id", ascending: false)
+            pagename.rightBarButtonItem?.tintColor = UIColor.gray
         }
         
         // Uncomment the following line to preserve selection between presentations

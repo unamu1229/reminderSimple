@@ -11,7 +11,7 @@
         <scene sceneID="yRo-0u-sKS">
             <objects>
                 <navigationController id="ADM-ge-kmd" sceneMemberID="viewController">
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="oX9-lW-TGv">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="oX9-lW-TGv">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -33,7 +33,7 @@
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <prototypes>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="reminderCell" textLabel="i9G-KD-vHs" detailTextLabel="cBI-Lx-zBe" style="IBUITableViewCellStyleValue1" id="UaH-OV-TEF">
-                                <rect key="frame" x="0.0" y="28" width="375" height="44"/>
+                                <rect key="frame" x="0.0" y="92" width="375" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="UaH-OV-TEF" id="2Zp-O8-FLH">
                                     <frame key="frameInset" width="375" height="44"/>
@@ -130,15 +130,11 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="nB8-pM-H69">
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="30" id="khY-1A-7eC"/>
-                                </constraints>
-                                <nil key="textColor"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits"/>
-                            </textField>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yTu-fe-H0A" customClass="CustomButton" customModule="reminderSimple" customModuleProvider="target">
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="300" id="EoG-tv-wT3"/>
+                                    <constraint firstAttribute="height" constant="50" id="lQw-mk-gIv"/>
+                                </constraints>
                                 <state key="normal" title="カテゴリ登録"/>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
@@ -155,15 +151,22 @@
                                     <action selector="addCategory" destination="iTG-JA-Heb" eventType="touchUpInside" id="qcB-dS-fbL"/>
                                 </connections>
                             </button>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="nB8-pM-H69">
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="300" id="IXK-Qe-KS6"/>
+                                </constraints>
+                                <nil key="textColor"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="nB8-pM-H69" firstAttribute="trailing" secondItem="yTu-fe-H0A" secondAttribute="trailing" id="1YE-hM-YVo"/>
-                            <constraint firstItem="nB8-pM-H69" firstAttribute="centerX" secondItem="LoK-Ba-fpY" secondAttribute="centerX" id="4QZ-W6-d1t"/>
-                            <constraint firstItem="nB8-pM-H69" firstAttribute="leading" secondItem="yTu-fe-H0A" secondAttribute="leading" id="54M-E8-AmE"/>
-                            <constraint firstItem="nB8-pM-H69" firstAttribute="leading" secondItem="LoK-Ba-fpY" secondAttribute="leadingMargin" constant="56" id="JQ1-BH-SQl"/>
-                            <constraint firstItem="B94-Ds-1WN" firstAttribute="top" secondItem="yTu-fe-H0A" secondAttribute="bottom" constant="288" id="Lrn-4M-x9M"/>
-                            <constraint firstItem="nB8-pM-H69" firstAttribute="top" secondItem="UiK-Jm-yz8" secondAttribute="bottom" constant="123" id="X3G-C7-EjA"/>
+                            <constraint firstItem="yTu-fe-H0A" firstAttribute="centerX" secondItem="LoK-Ba-fpY" secondAttribute="centerX" id="DeT-vJ-OO4"/>
+                            <constraint firstItem="nB8-pM-H69" firstAttribute="centerX" secondItem="LoK-Ba-fpY" secondAttribute="centerX" id="VHD-dc-RrU"/>
+                            <constraint firstItem="yTu-fe-H0A" firstAttribute="centerY" secondItem="LoK-Ba-fpY" secondAttribute="centerY" id="ajZ-eG-xEB"/>
+                            <constraint firstItem="nB8-pM-H69" firstAttribute="centerX" secondItem="LoK-Ba-fpY" secondAttribute="centerX" id="jfq-74-vR3"/>
+                            <constraint firstItem="yTu-fe-H0A" firstAttribute="top" secondItem="nB8-pM-H69" secondAttribute="bottom" constant="29" id="tjt-FN-lmw"/>
                         </constraints>
                     </view>
                     <connections>
@@ -247,6 +250,7 @@
                     </navigationItem>
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
+                        <outlet property="cateBtn" destination="xib-D9-wcu" id="S6k-lb-ZhZ"/>
                         <outlet property="cetegoryPicker" destination="KJu-XA-w97" id="hR7-tV-Vzx"/>
                         <outlet property="datepicker" destination="EpY-De-8ds" id="w4I-Jo-WKi"/>
                         <outlet property="textData" destination="nDe-di-QqW" id="9gR-wR-19d"/>
@@ -427,7 +431,7 @@
                     <navigationItem key="navigationItem" id="uTG-4Q-yKn">
                         <barButtonItem key="rightBarButtonItem" title="カテゴリ" id="mQR-PK-Oz2">
                             <connections>
-                                <segue destination="rRE-Ul-3jQ" kind="show" id="orP-03-55f"/>
+                                <segue destination="rRE-Ul-3jQ" kind="show" identifier="showCategory" id="orP-03-55f"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -448,7 +452,7 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="aKz-ZA-vSf"/>
-        <segue reference="OLo-Th-Kbs"/>
+        <segue reference="orP-03-55f"/>
+        <segue reference="w0q-UO-cPw"/>
     </inferredMetricsTieBreakers>
 </document>

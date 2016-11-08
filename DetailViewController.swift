@@ -11,8 +11,10 @@ import RealmSwift
 
 class DetailViewController:UIViewController,UIPickerViewDelegate,UIPickerViewDataSource {
     
+    let appDelegate:AppDelegate = UIApplication.shared.delegate as! AppDelegate
     var id = Int()
     let realm = try! Realm()
+    var reminders:Results<ReminderModel>!
     var categoryId = Int()
     var MPRC = MapPickerRowCategory()
     
@@ -22,22 +24,24 @@ class DetailViewController:UIViewController,UIPickerViewDelegate,UIPickerViewDat
     @IBAction func tapScreen(_ sender: UITapGestureRecognizer) {
          self.view.endEditing(true)
     }
+    @IBOutlet weak var cateBtn: UIBarButtonItem!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
+        if appDelegate.fromPage ==  "showComplete" || appDelegate.fromPage ==  "showCompleteCategory" {
+            cateBtn.tintColor = UIColor.gray
+        }
+        textData.sizeToFit()
+        reminders = realm.objects(ReminderModel).filter("id == %@", id)
+        textData.text = reminders[0].title
+        datepicker.date = reminders[0].mydate!
     }
     
     override func viewDidAppear(_ animated: Bool) {
-        textData.sizeToFit()
-        let reminders = realm.objects(ReminderModel).filter("id == %@", id)
-        for reminder in reminders {
-            textData.text = reminder.title
-            datepicker.date = reminder.mydate!
-            let row = MPRC.getPickerRow(categoryId: reminder.category_id)
-            cetegoryPicker.selectRow(row, inComponent: 0, animated: true)
-            categoryId = reminder.category_id
-        }
+        let row = MPRC.getPickerRow(categoryId: reminders[0].category_id)
+        cetegoryPicker.selectRow(row, inComponent: 0, animated: true)
+        categoryId = reminders[0].category_id
     }
     
     override func viewWillDisappear(_ animated: Bool) {

@@ -75,6 +75,8 @@ class ViewController: UIViewController {
             appDelegate.fromPage = "showTask"
         } else if segue.identifier == "showComplete" {
             appDelegate.fromPage = "showComplete"
+        } else if segue.identifier == "showCategory" {
+            appDelegate.fromPage = "showTask"
         }
     }
     
