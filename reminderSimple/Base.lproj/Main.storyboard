@@ -170,6 +170,7 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="addButton" destination="yTu-fe-H0A" id="fpO-3G-MTp"/>
                         <outlet property="input" destination="nB8-pM-H69" id="jqj-Yu-oBw"/>
                     </connections>
                 </viewController>
@@ -453,6 +454,6 @@
     </scenes>
     <inferredMetricsTieBreakers>
         <segue reference="orP-03-55f"/>
-        <segue reference="w0q-UO-cPw"/>
+        <segue reference="aKz-ZA-vSf"/>
     </inferredMetricsTieBreakers>
 </document>

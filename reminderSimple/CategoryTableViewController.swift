@@ -30,7 +30,6 @@ class CategoryTableViewController: UITableViewController {
 //        CategoryResults = realm.objects(CategoryModel.self).sorted(byProperty: "id", ascending: false)
         let category = Category()
         CategoryResults = category.CategoryResults
-        print(CategoryResults)
         for category in CategoryResults! {
             print(category.title)
         }
@@ -78,7 +77,38 @@ class CategoryTableViewController: UITableViewController {
             if appDelegate.fromPage.range(of: "Category") == nil {
                 appDelegate.fromPage += "Category"
             }
+        } else if segue.identifier == "showAddCategory"{
+            let categoryController = segue.destination as! CategoryController
+            if let id = sender as? Int {
+                categoryController.id = id
+            }
         }
+    }
+    
+    override func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
+        // Deleteボタン.
+        let deleteButton: UITableViewRowAction = UITableViewRowAction(style: .normal, title: "削除") { (action, index) -> Void in
+            
+            tableView.isEditing = false
+            // Delete the row from the data source
+            let realm = try! Realm()
+            realm.beginWrite()
+            realm.delete(self.CategoryResults![(indexPath as NSIndexPath).row])
+            try! realm.commitWrite()
+            
+            //tabelのセルをアニメーションで消す
+            tableView.deleteRows(at: [indexPath], with: .fade)
+            
+        }
+        deleteButton.backgroundColor = UIColor.red
+        
+        // 編集ボタン.
+        let editButton: UITableViewRowAction = UITableViewRowAction(style: .normal, title: "編集") { (action, index) -> Void in
+            self.performSegue(withIdentifier: "showAddCategory", sender:  self.CategoryResults![(indexPath as NSIndexPath).row].id)
+        }
+        editButton.backgroundColor = UIColor.gray
+        
+        return [deleteButton, editButton]
     }
     
 

@@ -10,6 +10,10 @@ import UIKit
 import RealmSwift
 
 class CategoryController: UIViewController {
+    
+    var id:Int?
+    let realm = try! Realm()
+    var arrCategory:Results<CategoryModel>?
 
     @IBOutlet weak var input: UITextField!
     
@@ -18,14 +22,15 @@ class CategoryController: UIViewController {
         let title = input.text!
         setCategory(title)
     }
+    @IBOutlet weak var addButton: CustomButton!
     
     func setCategory(_ title:String){
         let myAlert:UIAlertController!
         if (title != ""){
+
             let categoryModel = CategoryModel()
             categoryModel.id = categoryModel.lastId()
             categoryModel.title = title
-            let realm = try! Realm()
             do {
                 try realm.write {
                     realm.add(categoryModel)
@@ -35,6 +40,7 @@ class CategoryController: UIViewController {
             } catch {
                 myAlert = UIAlertController(title: "保存に失敗しました", message: title, preferredStyle: UIAlertControllerStyle.alert)
             }
+
         } else {
             myAlert = UIAlertController(title: "カテゴリ名を入力してください", message: "", preferredStyle: UIAlertControllerStyle.alert)
         }
@@ -45,8 +51,22 @@ class CategoryController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+		
         // Do any additional setup after loading the view.
+        if let id = self.id {
+            arrCategory = realm.objects(CategoryModel).filter("id == %@", id)
+            input.text = arrCategory?[0].title
+            
+            addButton.isHidden = true
+        }
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        if let title = input.text {
+            try! realm.write {
+                arrCategory?[0].title = title
+            }
+        }
     }
 
     override func didReceiveMemoryWarning() {

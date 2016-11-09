@@ -55,7 +55,6 @@ class TableViewController: UITableViewController {
         let deleteButton: UITableViewRowAction = UITableViewRowAction(style: .normal, title: "削除") { (action, index) -> Void in
             
             tableView.isEditing = false
-            print("delete")
             // Delete the row from the data source
             let realm = try! Realm()
             realm.beginWrite()
