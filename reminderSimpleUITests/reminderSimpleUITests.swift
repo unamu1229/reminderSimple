@@ -31,6 +31,14 @@ class reminderSimpleUITests: XCTestCase {
     func testExample() {
         // Use recording to get started writing UI tests.
         // Use XCTAssert and related functions to verify your tests produce the correct results.
+        
+//        let app = XCUIApplication()
+//        app.buttons["未実行 タスク一覧"].tap()
+//        let tablesQuery = app.tables.cells
+//        tablesQuery.element(boundBy: 0).swipeLeft()
+//        tablesQuery.element(boundBy: 0).buttons["実行済み"].tap()
+        
+        
     }
     
 }

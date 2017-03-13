@@ -84,6 +84,7 @@
 		F29885181D86DF2300C89651 /* iAd.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = iAd.framework; path = System/Library/Frameworks/iAd.framework; sourceTree = SDKROOT; };
 		F2AC417F1D61983E005A02C4 /* Design.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Design.swift; sourceTree = "<group>"; };
 		F2B824321D746503007E4C50 /* ReminderModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReminderModel.swift; sourceTree = "<group>"; };
+		F2CA9BF91DD6C0C7007CFD1D /* reminderSimple.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = reminderSimple.entitlements; sourceTree = "<group>"; };
 		F2F340A11DC48E5100AA9867 /* Category.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Category.swift; sourceTree = "<group>"; };
 		FA4D912B19D8E9CB8FBA66FB /* Pods_reminderSimpleUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_reminderSimpleUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		FFF0D60E407C07AE0C3EFE61 /* Pods-reminderSimpleUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-reminderSimpleUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-reminderSimpleUITests/Pods-reminderSimpleUITests.debug.xcconfig"; sourceTree = "<group>"; };
@@ -168,6 +169,7 @@
 		F21E4F451D3B877F00179FEE /* reminderSimple */ = {
 			isa = PBXGroup;
 			children = (
+				F2CA9BF91DD6C0C7007CFD1D /* reminderSimple.entitlements */,
 				F27B7F221D83A2E400316D44 /* DetailViewController.swift */,
 				F28C8E0F1DCD958C0025364D /* MapPickerCategory.swift */,
 				F2F340A11DC48E5100AA9867 /* Category.swift */,
@@ -285,6 +287,11 @@
 						CreatedOnToolsVersion = 7.3.1;
 						DevelopmentTeam = QAC2JLAP36;
 						LastSwiftMigration = 0800;
+						SystemCapabilities = {
+							com.apple.Push = {
+								enabled = 1;
+							};
+						};
 					};
 					F21E4F591D3B878000179FEE = {
 						CreatedOnToolsVersion = 7.3.1;
@@ -626,7 +633,7 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.1;
 				MTL_ENABLE_DEBUG_INFO = NO;
-				PROVISIONING_PROFILE = "555f2c60-6f93-4409-baa2-4469a790d342";
+				PROVISIONING_PROFILE = "a98dfd08-d026-4a14-a9c6-8b0f4453d138";
 				SDKROOT = iphoneos;
 				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
 				VALIDATE_PRODUCT = YES;
@@ -639,6 +646,7 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = reminderSimple/reminderSimple.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = reminderSimple/Info.plist;
@@ -656,6 +664,7 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = reminderSimple/reminderSimple.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = reminderSimple/Info.plist;

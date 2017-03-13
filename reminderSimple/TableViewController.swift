@@ -23,67 +23,49 @@ class TableViewController: UITableViewController {
     // Buttonを拡張する.
     override func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
         
+        tableView.isEditing = false
+        
         // 実行済みボタン.
         var completeOrTaskButton: UITableViewRowAction = UITableViewRowAction(style: .normal, title: "実行済み") { (action, index) -> Void in
-            
-            tableView.isEditing = false
-            print("doed")
             try! self.realm.write {
                 self.reminderResults![(indexPath as NSIndexPath).row].doflg = true
             }
             tableView.deleteRows(at: [indexPath], with: .fade)
         }
         completeOrTaskButton.backgroundColor = UIColor.blue
+        completeOrTaskButton.accessibilityLabel = "実行済み"
+        print(completeOrTaskButton.accessibilityAssistiveTechnologyFocusedIdentifiers())
         
         if appDelegate.fromPage ==  "showComplete" || appDelegate.fromPage ==  "showCompleteCategory" {
-            
             // 未実行に戻すボタン.
             completeOrTaskButton = UITableViewRowAction(style: .normal, title: "未実行に戻す") { (action, index) -> Void in
-                
-                tableView.isEditing = false
-                print("doed")
                 try! self.realm.write {
                     self.reminderResults![(indexPath as NSIndexPath).row].doflg = false
                 }
                 tableView.deleteRows(at: [indexPath], with: .fade)
             }
             completeOrTaskButton.backgroundColor = UIColor.blue
-            
         }
         
         // Deleteボタン.
         let deleteButton: UITableViewRowAction = UITableViewRowAction(style: .normal, title: "削除") { (action, index) -> Void in
-            
-            tableView.isEditing = false
             // Delete the row from the data source
             let realm = try! Realm()
             realm.beginWrite()
             realm.delete(self.reminderResults![(indexPath as NSIndexPath).row])
             try! realm.commitWrite()
-            
             //tabelのセルをアニメーションで消す
             tableView.deleteRows(at: [indexPath], with: .fade)
-            
         }
         deleteButton.backgroundColor = UIColor.red
         
         // 編集ボタン.
         let editButton: UITableViewRowAction = UITableViewRowAction(style: .normal, title: "編集") { (action, index) -> Void in
-            
-//            tableView.isEditing = false
-//            print("archive")
-//            
-//            let storyboard: UIStoryboard = self.storyboard!
-//            let detailViewController = storyboard.instantiateViewController(withIdentifier: "detail") as! DetailViewController
-//            detailViewController.id = self.reminderResults![(indexPath as NSIndexPath).row].id
-//            self.present(detailViewController, animated: true, completion: nil)
-            
             self.performSegue(withIdentifier: "toShowDetail", sender:  self.reminderResults![(indexPath as NSIndexPath).row].id)
         }
         editButton.backgroundColor = UIColor.gray
         
-        return [completeOrTaskButton, deleteButton, editButton]
-        
+        return [completeOrTaskButton, deleteButton, editButton]        
     }
 
     override func viewDidLoad() {
@@ -105,12 +87,6 @@ class TableViewController: UITableViewController {
             reminderResults = realm.objects(ReminderModel.self).filter("doflg == true").filter("category_id == \(category_id)").sorted(byProperty: "id", ascending: false)
             pagename.rightBarButtonItem?.tintColor = UIColor.gray
         }
-        
-        // Uncomment the following line to preserve selection between presentations
-        // self.clearsSelectionOnViewWillAppear = false
-
-        // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-        //self.navigationItem.rightBarButtonItem = self.editButtonItem()
         
     }
     
