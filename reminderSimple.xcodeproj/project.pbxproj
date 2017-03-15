@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		0CFE65CA9F610B8138ED8C79 /* Pods_reminderSimpleTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 418171C1D5F4836664B16036 /* Pods_reminderSimpleTests.framework */; };
 		36A0A3CF0D3CCE4452E01A62 /* Pods_reminderSimple.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7EFA20211A5D788848F208C3 /* Pods_reminderSimple.framework */; };
+		D5E17A331E79421D00712252 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = D5E17A321E79421D00712252 /* GoogleService-Info.plist */; };
 		F21E4F471D3B877F00179FEE /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F21E4F461D3B877F00179FEE /* AppDelegate.swift */; };
 		F21E4F491D3B877F00179FEE /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F21E4F481D3B877F00179FEE /* ViewController.swift */; };
 		F21E4F4C1D3B877F00179FEE /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F21E4F4A1D3B877F00179FEE /* Main.storyboard */; };
@@ -18,9 +19,6 @@
 		F21E4F5F1D3B878000179FEE /* reminderSimpleTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F21E4F5E1D3B878000179FEE /* reminderSimpleTests.swift */; };
 		F21E4F6A1D3B878000179FEE /* reminderSimpleUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F21E4F691D3B878000179FEE /* reminderSimpleUITests.swift */; };
 		F21E4F781D3B90E300179FEE /* TableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F21E4F771D3B90E200179FEE /* TableViewController.swift */; };
-		F222F1E51D93B9AA0099E9EF /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = F222F1E41D93B9AA0099E9EF /* GoogleService-Info.plist */; };
-		F222F1E61D93B9AA0099E9EF /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = F222F1E41D93B9AA0099E9EF /* GoogleService-Info.plist */; };
-		F222F1E71D93B9AA0099E9EF /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = F222F1E41D93B9AA0099E9EF /* GoogleService-Info.plist */; };
 		F23973071DAB839200D98975 /* CategoryModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F23973061DAB839200D98975 /* CategoryModel.swift */; };
 		F23973091DAB854B00D98975 /* CategoryController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F23973081DAB854B00D98975 /* CategoryController.swift */; };
 		F2546E901DC0EAB200982671 /* CategoryTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2546E8F1DC0EAB200982671 /* CategoryTableViewController.swift */; };
@@ -57,6 +55,7 @@
 		75E5376F6AB2A4DB9E313283 /* Pods-reminderSimple.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-reminderSimple.release.xcconfig"; path = "Pods/Target Support Files/Pods-reminderSimple/Pods-reminderSimple.release.xcconfig"; sourceTree = "<group>"; };
 		7EFA20211A5D788848F208C3 /* Pods_reminderSimple.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_reminderSimple.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		C1014A11594388A0F7864510 /* Pods-reminderSimple.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-reminderSimple.debug.xcconfig"; path = "Pods/Target Support Files/Pods-reminderSimple/Pods-reminderSimple.debug.xcconfig"; sourceTree = "<group>"; };
+		D5E17A321E79421D00712252 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		D6DE4CE8092179466085E422 /* Pods-reminderSimpleTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-reminderSimpleTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-reminderSimpleTests/Pods-reminderSimpleTests.debug.xcconfig"; sourceTree = "<group>"; };
 		E5CB87D5FFC22C86287EB2CB /* Pods-reminderSimpleUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-reminderSimpleUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-reminderSimpleUITests/Pods-reminderSimpleUITests.release.xcconfig"; sourceTree = "<group>"; };
 		F21E4F431D3B877F00179FEE /* reminderSimple.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = reminderSimple.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -74,7 +73,6 @@
 		F21E4F691D3B878000179FEE /* reminderSimpleUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = reminderSimpleUITests.swift; sourceTree = "<group>"; };
 		F21E4F6B1D3B878000179FEE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		F21E4F771D3B90E200179FEE /* TableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TableViewController.swift; sourceTree = "<group>"; };
-		F222F1E41D93B9AA0099E9EF /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../../../../Volumes/BuffaloHD/Downloads/GoogleService-Info.plist"; sourceTree = "<group>"; };
 		F23973061DAB839200D98975 /* CategoryModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CategoryModel.swift; sourceTree = "<group>"; };
 		F23973081DAB854B00D98975 /* CategoryController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CategoryController.swift; sourceTree = "<group>"; };
 		F2546E8F1DC0EAB200982671 /* CategoryTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CategoryTableViewController.swift; sourceTree = "<group>"; };
@@ -146,7 +144,7 @@
 		F21E4F3A1D3B877F00179FEE = {
 			isa = PBXGroup;
 			children = (
-				F222F1E41D93B9AA0099E9EF /* GoogleService-Info.plist */,
+				D5E17A321E79421D00712252 /* GoogleService-Info.plist */,
 				F21E4F451D3B877F00179FEE /* reminderSimple */,
 				F21E4F5D1D3B878000179FEE /* reminderSimpleTests */,
 				F21E4F681D3B878000179FEE /* reminderSimpleUITests */,
@@ -331,7 +329,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				F21E4F541D3B877F00179FEE /* LaunchScreen.storyboard in Resources */,
-				F222F1E51D93B9AA0099E9EF /* GoogleService-Info.plist in Resources */,
+				D5E17A331E79421D00712252 /* GoogleService-Info.plist in Resources */,
 				F21E4F511D3B877F00179FEE /* Assets.xcassets in Resources */,
 				F21E4F4C1D3B877F00179FEE /* Main.storyboard in Resources */,
 			);
@@ -341,7 +339,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				F222F1E61D93B9AA0099E9EF /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -349,7 +346,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				F222F1E71D93B9AA0099E9EF /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
